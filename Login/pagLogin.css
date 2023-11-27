@@ -1,0 +1,34 @@
+body{
+    background-image: url(../Imgs/Fundo.jpg);
+    background-size: 100%;
+}
+#titulo{
+    width: 100%;
+    height: 15vh;
+    font-size: 20px;
+    text-align: center;
+}
+#Logar{
+    background-color: #3636ca;
+    color: white;
+}
+span{
+    color: #3636ca;
+}
+span:hover{
+    color: #a036ca;
+    transition: 0.5s;
+    text-decoration: underline;
+    cursor: pointer;
+}
+h1{
+    color: white;
+}
+p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+h2{
+    font-weight: 900;
+}
