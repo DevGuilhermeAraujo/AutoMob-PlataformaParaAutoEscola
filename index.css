@@ -2,6 +2,10 @@
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+body{
+    margin: 0;
+    background-color: rgb(238, 238, 238);
+}
 .painelCentral{
     width: 40%;
     margin: 2% 0% 0% 30%;
@@ -30,4 +34,35 @@
 }
 .iconeTitulos{
     width: 2%;
+}
+.iconeNav{
+    width: 30%;
+    margin-right: 5%;
+}
+.Inicio{
+    background-color: #3636ca;
+    color: white;
+    padding: 2%;
+}
+.Inicio span{
+    color: #02024b;
+}
+.Nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e2dfdf;
+    font-size: 17px;
+    top: 0px;
+    position: sticky;
+}
+.Nav a{
+    width: 10%;
+    padding: 1%;
+    text-decoration: none;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    color: black;
+    margin: 0% 5.5% 0% 5.5%;
 }

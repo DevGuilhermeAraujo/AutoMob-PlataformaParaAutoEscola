@@ -1,0 +1,76 @@
+
+Sua equipe foi contratada para desenvolver um sistema web para uma autoescola
+que visa otimizar a gestão de seus veículos, alunos e agendamento de aulas. O
+projeto deve contemplar um CRUD para carros e alunos, bem como a funcionalidade
+de agendamento de aulas.
+
+O objetivo principal deste projeto é criar uma solução completa e funcional que
+permita à autoescola gerenciar sua frota de veículos, cadastrar alunos e agendar
+aulas de forma eficaz.
+
+Para o projeto deve seguir alguns pré requisitos:
+
+
+Cadastro de Carros:
+
+Desenvolva uma página para o cadastro de novos veículos, considerando
+informações como marca, modelo, ano, placa e capacidade de passageiros.
+Implemente a funcionalidade de edição para permitir atualizações nos dados dos
+carros já cadastrados.
+Crie uma lista com os carros e também uma busca de dados.
+Garanta a opção de exclusão de veículos do sistema.
+
+
+Cadastro de Alunos:
+
+Crie uma página para o cadastro de novos alunos, contemplando dados como nome,
+CPF, data de nascimento, endereço e telefone.
+Implemente a funcionalidade de edição para atualizar informações de alunos já
+cadastrados.
+Crie uma lista com os alunos e que possa também buscar os dados.
+Inclua a opção de exclusão de alunos do sistema.
+
+
+Agendamento de Aulas:
+
+Desenvolva uma interface intuitiva para o agendamento de aulas, permitindo que os
+alunos selecionem carros disponíveis, escolham data e horário convenientes.
+Ofereça uma visualização clara dos agendamentos existentes, detalhando
+informações como aluno, carro, data e horário.
+Inclua a opção de cancelamento de agendamentos.
+
+
+SQL do Banco de dados:
+
+-- Criação do banco de dados
+CREATE DATABASE IF NOT EXISTS autoescola;
+-- Seleção do banco de dados
+USE autoescola;
+-- Tabela de Carros
+CREATE TABLE IF NOT EXISTS carros (
+id INT AUTO_INCREMENT PRIMARY KEY,
+marca VARCHAR(50) NOT NULL,
+modelo VARCHAR(50) NOT NULL,
+ano INT NOT NULL,
+placa VARCHAR(10) NOT NULL,
+capacidade_passageiros INT NOT NULL
+);
+-- Tabela de Alunos
+CREATE TABLE IF NOT EXISTS alunos (
+id INT AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(100) NOT NULL,
+cpf VARCHAR(14) NOT NULL,
+data_nascimento DATE NOT NULL,
+endereco VARCHAR(255) NOT NULL,
+telefone VARCHAR(15) NOT NULL
+);
+-- Tabela de Agendamentos
+CREATE TABLE IF NOT EXISTS agendamentos (
+id INT AUTO_INCREMENT PRIMARY KEY,
+aluno_id INT NOT NULL,
+carro_id INT NOT NULL,
+data_aula DATE NOT NULL,
+horario_aula TIME NOT NULL,
+FOREIGN KEY (aluno_id) REFERENCES alunos(id),
+FOREIGN KEY (carro_id) REFERENCES carros(id)
+);

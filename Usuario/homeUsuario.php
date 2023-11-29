@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HomeUsuario</title>
+    <link rel="stylesheet" href="Usuario.css">
+    <link rel="stylesheet" href="../index.css">
 </head>
 <body>
-    <h2>Página do usuário</h2>
+    <div class="Inicio">
+        <h1>Olá, seja bem vindo <span>Fulanim... <!--Aqui deverá aparecer o nome do usuário--></span></h1>
+    </div>
+
 </body>
 </html>
