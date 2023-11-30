@@ -40,14 +40,15 @@ body{
     margin-right: 5%;
 }
 .Inicio{
-    background-color: #3636ca;
+    background-color: #02024b;
     color: white;
     padding: 2%;
 }
 .Inicio span{
-    color: #02024b;
+    color: #3636ca;
 }
 .Nav{
+    padding: 1%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,9 +56,11 @@ body{
     font-size: 17px;
     top: 0px;
     position: sticky;
+    border-bottom: 3px solid #02024b;
 }
 .Nav a{
     width: 10%;
+    border-radius: 10px;
     padding: 1%;
     text-decoration: none;
     font-weight: 900;

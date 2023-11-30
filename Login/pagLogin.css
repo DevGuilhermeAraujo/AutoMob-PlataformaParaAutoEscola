@@ -9,11 +9,11 @@ body{
     text-align: center;
 }
 #Logar{
-    background-color: #3636ca;
+    background-color: #02024b;
     color: white;
 }
 span{
-    color: #3636ca;
+    color: #02024b;
 }
 span:hover{
     color: #a036ca;
@@ -31,4 +31,8 @@ p{
 }
 h2{
     font-weight: 900;
+}
+.testes{
+    border: 2px solid #02024b;
+    width: 100%;
 }
