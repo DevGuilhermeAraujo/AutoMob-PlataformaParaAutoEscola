@@ -47,13 +47,24 @@ body{
 .Inicio span{
     color: #3636ca;
 }
+.Inicio h1{
+    font-size: 50px;
+}
+.Inicio a{
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 0.5%;
+}
 .Nav{
     padding: 1%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #e2dfdf;
-    font-size: 17px;
+    font-size: 15px;
     top: 0px;
     position: sticky;
     border-bottom: 3px solid #02024b;

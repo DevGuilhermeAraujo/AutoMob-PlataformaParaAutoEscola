@@ -1,0 +1,57 @@
+.cad{
+   padding: 2%;
+}
+h2{
+    width: 100%;
+    font-size: 40px;
+    color: #02024b;
+}
+form{
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+}
+input{
+    width: 31%;
+    padding: 1%;
+    border: none;
+    border-radius: 5px;
+    margin: 1%;
+    border: 2px solid #02024b;
+    font-size: 15px;
+}
+#cada{
+    background-color: #02024b;
+    color: white;
+}
+.Usu{
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    background-color: #c7c5c5;
+    padding: 1%;
+    border-radius: 20px;
+    margin-bottom: 5%;
+}
+.ico{
+    width: 13%;
+    display: flex;
+    align-items: center;
+}
+.ico img{
+    width: 100%;
+}
+.infor{
+    width: 87%;
+    padding: 1%;
+    font-size: 20px;
+}
+.infor button{
+    border-radius: 10px;
+    border: none;
+    padding: 1%;
+    width: 20%;
+    margin-right: 5%;
+    font-size: 18px;
+    color: white;
+}
