@@ -79,7 +79,7 @@ if (isset($_POST['data'])) {
                 }
                 ?>
             </select>
-            <input type="date" name="data">
+            <input type="date" name="data" required>
             <input type="submit" name="submit" value="Visualizar horários disponíveis">
         </form>
         <?php
