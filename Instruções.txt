@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS usuariosValids(
     email VARCHAR(50) NOT NULL,
     tipo INT(1) NOT NULL
     );
--- Tabela de Alunos
+-- Tabela de alunos
 Tabela usada para validação de usuarios(alunos), ou seja, o aluno ao se cadastrar no sistema, será cadastrado nessa tabela temporária onde o professor(adm do sistema) deverá validar esse usuário, se for validado, ele será apagado dessa tabela e direcionado a tabela usuariosValids
 CREATE TABLE IF NOT EXISTS usuariosNoValids (
 	id INT AUTO_INCREMENT PRIMARY KEY,
@@ -88,3 +88,47 @@ horario_aula TIME NOT NULL,
 FOREIGN KEY (aluno_id) REFERENCES usuariosValids(id),
 FOREIGN KEY (carro_id) REFERENCES carros(id)
 );
+
+--INSERT usuarios
+INSERT INTO usuariosvalids (nome, cpf, data_nascimento, endereco, telefone, email, tipo) VALUES
+('Maria Silva', '123.456.789-01', '1990-05-15', 'Rua A, 123', '(11) 98765-4321', 'maria@email.com', 2);
+
+INSERT INTO usuariosvalids (nome, cpf, data_nascimento, endereco, telefone, email, tipo) VALUES
+('João Oliveira', '987.654.321-09', '1985-08-20', 'Avenida B, 456', '(22) 98765-1234', 'joao@email.com', 2);
+
+INSERT INTO usuariosvalids (nome, cpf, data_nascimento, endereco, telefone, email, tipo) VALUES
+('Ana Souza', '555.555.555-55', '1995-02-10', 'Rua C, 789', '(33) 98765-5678', 'ana@email.com', 2);
+
+INSERT INTO usuariosvalids (nome, cpf, data_nascimento, endereco, telefone, email, tipo) VALUES
+('Pedro Santos', '111.222.333-44', '1980-11-25', 'Avenida D, 987', '(44) 98765-8765', 'pedro@email.com', 2);
+
+INSERT INTO usuariosvalids (nome, cpf, data_nascimento, endereco, telefone, email, tipo) VALUES
+('Camila Lima', '777.888.999-00', '1998-07-05', 'Rua E, 654', '(55) 98765-4321', 'camila@email.com', 2);
+
+
+--INSERT Carros
+INSERT INTO carros (marca, modelo, ano, placa, capacidade_passageiros) VALUES
+('Volkswagen', 'Gol', 2022, 'ABC1234', 5);
+
+INSERT INTO carros (marca, modelo, ano, placa, capacidade_passageiros) VALUES
+('Ford', 'Fiesta', 2021, 'XYZ5678', 4);
+
+INSERT INTO carros (marca, modelo, ano, placa, capacidade_passageiros) VALUES
+('Chevrolet', 'Onix', 2023, 'DEF9876', 5);
+
+INSERT INTO carros (marca, modelo, ano, placa, capacidade_passageiros) VALUES
+('Toyota', 'Corolla', 2022, 'MNO5432', 5);
+
+
+--INSERT agendamentos
+INSERT INTO agendamentos (aluno_id, carro_id, data_aula, horario_aula) VALUES
+(1, 1, '2023-10-10', '08:00:00');
+
+INSERT INTO agendamentos (aluno_id, carro_id, data_aula, horario_aula) VALUES
+(2, 2, '2023-10-10', '10:30:00');
+
+INSERT INTO agendamentos (aluno_id, carro_id, data_aula, horario_aula) VALUES
+(3, 3, '2023-10-10', '13:00:00');
+
+INSERT INTO agendamentos (aluno_id, carro_id, data_aula, horario_aula) VALUES
+(4, 4, '2023-10-10', '15:30:00');
