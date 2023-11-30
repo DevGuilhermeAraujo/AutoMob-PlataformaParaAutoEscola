@@ -55,14 +55,28 @@ ano INT NOT NULL,
 placa VARCHAR(10) NOT NULL,
 capacidade_passageiros INT NOT NULL
 );
+-- Tabela de Usuários
+CREATE TABLE IF NOT EXISTS usuariosValids(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+	nome VARCHAR(100) NOT NULL,
+	cpf VARCHAR(14) NOT NULL,
+	data_nascimento DATE NOT NULL,
+	endereco VARCHAR(255) NOT NULL,
+	telefone VARCHAR(15) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    tipo INT(1) NOT NULL
+    );
 -- Tabela de Alunos
-CREATE TABLE IF NOT EXISTS alunos (
-id INT AUTO_INCREMENT PRIMARY KEY,
-nome VARCHAR(100) NOT NULL,
-cpf VARCHAR(14) NOT NULL,
-data_nascimento DATE NOT NULL,
-endereco VARCHAR(255) NOT NULL,
-telefone VARCHAR(15) NOT NULL
+Tabela usada para validação de usuarios(alunos), ou seja, o aluno ao se cadastrar no sistema, será cadastrado nessa tabela temporária onde o professor(adm do sistema) deverá validar esse usuário, se for validado, ele será apagado dessa tabela e direcionado a tabela usuariosValids
+CREATE TABLE IF NOT EXISTS usuariosNoValids (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	nome VARCHAR(100) NOT NULL,
+	cpf VARCHAR(14) NOT NULL,
+	data_nascimento DATE NOT NULL,
+	endereco VARCHAR(255) NOT NULL,
+	telefone VARCHAR(15) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    tipo INT(1) NOT NULL
 );
 -- Tabela de Agendamentos
 CREATE TABLE IF NOT EXISTS agendamentos (

@@ -12,7 +12,7 @@
         <h1><img class="iconeTitulos" src="../Imgs/icoBandeira.png" alt="icone volante"> Auto escola Automob <img class="iconeTitulos" src="../Imgs/icoBandeira.png" alt="icone volante"></h1>
     </div>
     <div id="painel1" class="painelCentral">
-        <form>
+        <form action="" method="POST">
             <h2>AUTOMOB</h2>
             <p><img class="icone" src="../Imgs/icoUsuario.png" alt="Icone usuario"> Acesse seu perfil:</p>
             <input type="email" placeholder="E-mail">
@@ -22,7 +22,7 @@
         </form>
     </div>
     <div id="painel2"  style="display: none;" class="painelCentral">
-        <form>
+        <form action="" method="POST">
             <h2>AUTOMOB</h2>
             <p><img class="icone" src="../Imgs/icoUsuario.png" alt="Icone usuario">Cadastre seu perfil:</p>
             <input type="text" placeholder="Nome">
