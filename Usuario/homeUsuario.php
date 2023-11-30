@@ -13,48 +13,46 @@
     </div>
     <div class="Nav">
         <a href="../Login/pagLogin.php"><img class="iconeNav" src="../Imgs/icoSair.png" alt="icone sair"> Voltar</a>
-        <a href=""><img class="iconeNav" src="../Imgs/icoVolante.png" alt="icone veículos"> Veículos</a>
-        <a href=""><img class="iconeNav" src="../Imgs/icoUsuario.png" alt="icone usuários"> Alunos</a>
+        <a href="veiculoUsuario.php"><img class="iconeNav" src="../Imgs/icoVolante.png" alt="icone veículos"> Veículos</a>
+        <a href="alunosUUsuario.php"><img class="iconeNav" src="../Imgs/icoUsuario.png" alt="icone usuários"> Alunos</a>
     </div>
-    <div class="visual">
-            <form>
-                <h2><img id="Agenda" src="../Imgs/icoAgenda.png" alt="icone agendamento"> Agendar horário</h2>
-                <select name="" id="">
-                    <option value="null">Veículo</option>
-                    <option value="">Gol</option>
-                    <option value="">Fusca</option>
-                    <option value="">Honda</option>
-                    <option value="">Cavalo</option>
-                </select>
-                <select name="" id="">
-                    <option value="null">Dia</option>
-                    <option value="">Segunda</option>
-                    <option value="">Terça</option>
-                    <option value="">Quarta</option>
-                    <option value="">Quinta</option>
-                    <option value="">Sexta</option>
-                </select>
-                <input type="submit" value="Visualizar horários disponíveis">
-            </form>
-            <div id="horarios">
-                <h2>Segunda 01/01/0000</h2>
-                <i>07:00</i>
-                <i>08:00</i>
-                <i>09:00</i>
-                <i>10:00</i>
-                <i>11:00</i>
-                <i>12:00</i>
-                <i>13:00</i>
-                <i>14:00</i>
-                <i>15:00</i>
-                <i>16:00</i>
-                <i>17:00</i>
-                <i>18:00</i>
-                <i>19:00</i>
-                <i>20:00</i>
-                <i>21:00</i>
-                <i>22:00</i>
-            </div>
-    </div>
+        <form>
+            <h2><img id="Agenda" src="../Imgs/icoAgenda.png" alt="icone agendamento"> Agendar horário</h2>
+            <select name="" id="">
+                <option value="null">Veículo</option>
+                <option value="">Gol</option>
+                <option value="">Fusca</option>
+                <option value="">Honda</option>
+                <option value="">Cavalo</option>
+            </select>
+            <select name="" id="">
+                <option value="null">Dia</option>
+                <option value="">Segunda</option>
+                <option value="">Terça</option>
+                <option value="">Quarta</option>
+                <option value="">Quinta</option>
+                <option value="">Sexta</option>
+            </select>
+            <input type="submit" value="Visualizar horários disponíveis">
+        </form>
+        <div id="horarios">
+            <h2>Segunda 01/01/0000</h2>
+            <i>07:00</i>
+            <i>08:00</i>
+            <i>09:00</i>
+            <i>10:00</i>
+            <i>11:00</i>
+            <i>12:00</i>
+            <i>13:00</i>
+            <i>14:00</i>
+            <i>15:00</i>
+            <i>16:00</i>
+            <i>17:00</i>
+            <i>18:00</i>
+            <i>19:00</i>
+            <i>20:00</i>
+            <i>21:00</i>
+            <i>22:00</i>
+        </div>
 </body>
 </html>
