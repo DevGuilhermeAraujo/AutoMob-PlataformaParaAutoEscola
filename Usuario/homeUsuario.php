@@ -82,14 +82,20 @@ if (isset($_POST['data'])) {
             <input type="date" name="data">
             <input type="submit" name="submit" value="Visualizar horários disponíveis">
         </form>
-        <div id="horarios">
-            <?php
-            echo "<h2>$dataEscolhida</h2>";
-            foreach ($horariosDisponiveis as $horario) {
-                echo "<i>$horario</i>";
-            }
-            ?>
-        </div>
+        <?php
+        if (isset($dataEscolhida)) {
+        ?>
+            <div id="horarios">
+                <?php
+                echo "<h2>$dataEscolhida</h2>";
+                foreach ($horariosDisponiveis as $horario) {
+                    echo "<i>$horario</i>";
+                }
+                ?>
+            </div>
+        <?php
+        }
+        ?>
     </div>
 </body>
 
