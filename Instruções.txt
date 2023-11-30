@@ -85,6 +85,6 @@ aluno_id INT NOT NULL,
 carro_id INT NOT NULL,
 data_aula DATE NOT NULL,
 horario_aula TIME NOT NULL,
-FOREIGN KEY (aluno_id) REFERENCES alunos(id),
+FOREIGN KEY (aluno_id) REFERENCES usuariosValids(id),
 FOREIGN KEY (carro_id) REFERENCES carros(id)
 );
