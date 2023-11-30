@@ -19,7 +19,6 @@
                 echo $e->getCode();
           }
     }
-
     public function executar($sql)
     {
         $stmt = $this->pdo->prepare($sql);
@@ -28,6 +27,5 @@
         return $result;
 
     }
-    
 }
 ?>
