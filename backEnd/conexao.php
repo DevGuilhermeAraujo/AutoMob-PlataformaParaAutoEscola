@@ -1,5 +1,5 @@
 <?php
-// --- IMPORTANTE: Esse arquivo provavelmente será subistituido posteriormente.
+
 class Conexao
 {
     private $host = "localhost";
