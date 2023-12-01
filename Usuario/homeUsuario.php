@@ -68,7 +68,7 @@ if (isset($_POST['data'])) {
     <div class="visual">
         <form method="POST">
             <h2><img id="Agenda" src="../Imgs/icoAgenda.png" alt="icone agendamento"> Agendar horário</h2>
-            <select>
+            <select name="veiculo" required>
                 <option value="null">Veículo</option>
                 <?php
                 $result = $db->executar("SELECT id, modelo FROM carros");
