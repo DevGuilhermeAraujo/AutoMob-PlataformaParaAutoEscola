@@ -86,41 +86,72 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
         <a href=""><img class="iconeNav" src="../Imgs/icoVolante.png" alt="icone veículos"> Veículos</a>
         <a href=""><img class="iconeNav" src="../Imgs/icoUsuario.png" alt="icone usuários"> Alunos</a>
     </div>
-    <div class="visual">
-        <form method="POST">
-            <h2><img id="Agenda" src="../Imgs/icoAgenda.png" alt="icone agendamento"> Agendar horário</h2>
-            <select name="veiculo" required>
-                <option value="">Veículo</option>
-                <?php
-                $result = $db->executar("SELECT id, modelo FROM carros");
-                foreach ($result as $carros) {
-                    $idCarro = $carros['id'];
-                    $modeloCarro = $carros['modelo'];
-                    echo "<option value='$idCarro'>$modeloCarro</option>";
-                }
-                ?>
-            </select>
-            <input type="date" name="data" required>
-            <input type="submit" name="submit" value="Visualizar horários disponíveis">
-        </form>
-        <?php
-        if (isset($dataEscolhida)) {
-        ?>
-            <div id="horarios">
-                <?php
-                echo "<h2>$dataEscolhida</h2>";
+    <div class="Agenda">
+        <h2>Meus horários</h2>
+        <div class="titulos">
+            <p>
+                <span>Data</span>
+                <span>Carro</span>
+                <span>Placa</span>
+                <span>Professor</span>
+                <span>Remover</span>
+            </p>
+        </div>
+        <p>
+            <span>01/01/0001 12:00</span>
+            <span>Chevrolet/Camaro</span>
+            <span>abcd-1234</span>
+            <span>Professor</span>
+            <button>X</button>
+        </p>
+        <p>
+            <span>01/01/0001 12:00</span>
+            <span>Chevrolet/Camaro</span>
+            <span>abcd-1234</span>
+            <span>Professor</span>
+            <button>X</button>
+        </p>
+        <p>
+            <span>01/01/0001 12:00</span>
+            <span>Chevrolet/Camaro</span>
+            <span>abcd-1234</span>
+            <span>Professor</span>
+            <button>X</button>
+        </p>
+    </div>
+    <form method="POST">
+        <h2><img id="Agenda" src="../Imgs/icoAgenda.png" alt="icone agendamento"> Agendar horário</h2>
+        <select name="veiculo" required>
+            <option value="">Veículo</option>
+            <?php
+            $result = $db->executar("SELECT id, modelo FROM carros");
+            foreach ($result as $carros) {
+                $idCarro = $carros['id'];
+                $modeloCarro = $carros['modelo'];
+                echo "<option value='$idCarro'>$modeloCarro</option>";
+            }
+            ?>
+        </select>
+        <input type="date" name="data" required>
+        <input type="submit" name="submit" value="Visualizar horários disponíveis">
+    </form>
+    <?php
+    if (isset($dataEscolhida)) {
+    ?>
+        <div id="horarios">
+            <?php
+            echo "<h2>$dataEscolhida</h2>";
                 if (empty($horariosDisponiveis)) {
                     echo "<p>Fechado</p>";
                 } else {
-                    foreach ($horariosDisponiveis as $horario) {
-                        echo "<i><a href='../backEnd/processLancarAgendamento.php?horario=$horario&dtEscolhida=$dataEscolhida&veicEscolhido=$veiculoEscolhido'>$horario</a></i>";
+                foreach ($horariosDisponiveis as $horario) {
+                    echo "<i><a href='../backEnd/processLancarAgendamento.php?horario=$horario&dtEscolhida=$dataEscolhida&veicEscolhido=$veiculoEscolhido'>$horario</a></i>";
                     }
-                }
-                ?>
-            </div>
-        <?php
-        }
-        ?>
-    </div>
+            }
+            ?>
+        </div>
+    <?php
+    }
+    ?>
 </body>
 </html>
