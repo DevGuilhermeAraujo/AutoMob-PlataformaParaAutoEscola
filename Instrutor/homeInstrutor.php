@@ -17,6 +17,38 @@
         <a href=""><img class="iconeNav" src="../Imgs/icoUsuario.png" alt="icone usuários"> Alunos</a>
         <a href="cadastrar.php"><img class="iconeNav" src="../Imgs/icoCadastro.png" alt="icone de cadastro">Cadastrar</a>
     </div>
-    
+    <div class="Agenda">
+            <h2>Meus horários</h2>
+            <div class="titulos">
+                <p>
+                    <span>Data</span>
+                    <span>Carro</span>
+                    <span>Placa</span>
+                    <span>Professor</span>
+                    <span>Remover</span>
+                </p>
+            </div>
+            <p>
+                <span>01/01/0001 12:00</span>
+                <span>Chevrolet/Camaro</span>
+                <span>abcd-1234</span>
+                <span>Professor</span>
+                <button>X</button>
+            </p>
+            <p>
+                <span>01/01/0001 12:00</span>
+                <span>Chevrolet/Camaro</span>
+                <span>abcd-1234</span>
+                <span>Professor</span>
+                <button>X</button>
+            </p>
+            <p>
+                <span>01/01/0001 12:00</span>
+                <span>Chevrolet/Camaro</span>
+                <span>abcd-1234</span>
+                <span>Professor</span>
+                <button>X</button>
+            </p>
+        </div>
 </body>
 </html>
