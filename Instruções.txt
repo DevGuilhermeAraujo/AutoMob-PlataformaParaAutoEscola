@@ -135,4 +135,5 @@ INSERT INTO agendamentos (aluno_id, carro_id, data_aula, horario_aula) VALUES
 
 
 
-ALTER TABLE agendamentos MODIFY COLUMN horario_aula TIME DEFAULT '00:00';
+ALTER TABLE usuariosnovalids ADD COLUMN senha VARCHAR(60) NOT NULL
+ALTER TABLE usuariosvalids ADD COLUMN senha VARCHAR(60) NOT NULL
