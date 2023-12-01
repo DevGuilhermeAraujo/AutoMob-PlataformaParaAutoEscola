@@ -132,3 +132,7 @@ INSERT INTO agendamentos (aluno_id, carro_id, data_aula, horario_aula) VALUES
 
 INSERT INTO agendamentos (aluno_id, carro_id, data_aula, horario_aula) VALUES
 (4, 4, '2023-10-10', '15:30:00');
+
+
+
+ALTER TABLE agendamentos MODIFY COLUMN horario_aula TIME DEFAULT '00:00';

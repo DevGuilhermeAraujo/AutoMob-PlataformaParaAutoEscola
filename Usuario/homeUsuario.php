@@ -2,20 +2,40 @@
 include_once "../backEnd/conexao.php";
 $db = new Conexao;
 
-if (isset($_POST['data'])) {
+if (isset($_POST['data']) && isset($_POST['veiculo'])) {
 
     $dataEscolhida = $_POST['data'];
+    $veiculoEscolhido = $_POST['veiculo'];
+
+    function isDiaUtil($data)
+    {
+        // Converte a data para um objeto DateTime
+        $dataObj = new DateTime($data);
+        // Obtém o número do dia da semana (0 para domingo, 1 para segunda, etc.)
+        $diaSemana = $dataObj->format('N');
+        // Retorna verdadeiro se for um dia útil (segunda a sexta)
+        return ($diaSemana >= 1 && $diaSemana <= 5);
+    }
+
     function obterHorariosDisponiveis($dataEscolhida)
     {
-        // Aqui você pode implementar lógica para gerar os horários disponíveis, por exemplo, de 8h às 18h, em intervalos de 1 hora.
-        // Esta é apenas uma implementação de exemplo, você deve ajustar conforme necessário.
-        $horariosDisponiveis = [];
-        $horarioInicio = new DateTime('07:00');
-        $horarioFim = new DateTime('22:00');
-        while ($horarioInicio <= $horarioFim) {
-            $horariosDisponiveis[] = $horarioInicio->format('H:i');
-            $horarioInicio->add(new DateInterval('PT1H')); // Adiciona 1 hora
+        global $db;
+
+        // Verifica se a data escolhida é um dia útil
+        if (isDiaUtil($dataEscolhida)) {
+            // Lógica para gerar horários disponíveis nos dias úteis
+            $horariosDisponiveis = [];
+            $horarioInicio = new DateTime('07:00');
+            $horarioFim = new DateTime('22:00');
+            while ($horarioInicio <= $horarioFim) {
+                $horariosDisponiveis[] = $horarioInicio->format('H:i');
+                $horarioInicio->add(new DateInterval('PT1H')); // Adiciona 1 hora
+            }
+        } else {
+            // Se não for um dia útil, retorna um array vazio (fechado)
+            $horariosDisponiveis = [];
         }
+
         // Agora, você pode consultar o banco de dados para obter os horários já agendados para a data escolhida
         $horariosAgendados = obterHorariosAgendados($dataEscolhida);
         // Remove os horários já agendados dos disponíveis
@@ -26,6 +46,7 @@ if (isset($_POST['data'])) {
 
         return $horariosDisponiveis;
     }
+
     // Função para obter os horários já agendados para uma data específica do banco de dados
     function obterHorariosAgendados($dataEscolhida)
     {
@@ -40,9 +61,9 @@ if (isset($_POST['data'])) {
         }
         return $horariosAgendados;
     }
+
     // Exemplo de uso:
     $horariosDisponiveis = obterHorariosDisponiveis($dataEscolhida);
-    // Exibir os horários disponíveis
 }
 ?>
 <!DOCTYPE html>
@@ -100,8 +121,8 @@ if (isset($_POST['data'])) {
     </div>
     <form method="POST">
         <h2><img id="Agenda" src="../Imgs/icoAgenda.png" alt="icone agendamento"> Agendar horário</h2>
-        <select>
-            <option value="null">Veículo</option>
+        <select name="veiculo" required>
+            <option value="">Veículo</option>
             <?php
             $result = $db->executar("SELECT id, modelo FROM carros");
             foreach ($result as $carros) {
@@ -120,8 +141,12 @@ if (isset($_POST['data'])) {
         <div id="horarios">
             <?php
             echo "<h2>$dataEscolhida</h2>";
-            foreach ($horariosDisponiveis as $horario) {
-                echo "<i>$horario</i>";
+                if (empty($horariosDisponiveis)) {
+                    echo "<p>Fechado</p>";
+                } else {
+                foreach ($horariosDisponiveis as $horario) {
+                    echo "<i><a href='../backEnd/processLancarAgendamento.php?horario=$horario&dtEscolhida=$dataEscolhida&veicEscolhido=$veiculoEscolhido'>$horario</a></i>";
+                    }
             }
             ?>
         </div>
@@ -129,5 +154,4 @@ if (isset($_POST['data'])) {
     }
     ?>
 </body>
-
 </html>
