@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 session_start();
 //Constantes de ambiente
@@ -150,8 +149,7 @@ function redirectPOST(string $url, string $values, ?string $importJsUri = "../Ba
     //Chamar o metodo javascript para interação no lado cliente
     echo "<script>redirectPOSTAjax('$url', '$values');</script>";
 }
-=======
-<?php 
+
 
 const SESSION_VAR = "SESSIONDATA";
 
@@ -226,4 +224,3 @@ class sessao{
 }
 
 ?>
->>>>>>> 24fb23abbcc9ceae1d97c61d2e96c7fc7a4fadb9
