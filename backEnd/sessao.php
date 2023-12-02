@@ -3,8 +3,6 @@ session_start();
 //Constantes de ambiente
 const SESSION_USER_ID = "UserId";
 const SESSION_USERNAME = "UserName";
-//Legado (Falha de segurança) - Retirar em breve
-const SESSION_USER_IDPERMISSION = "UserIdPermission";
 
 const PERMISSION_INSTRUTOR = 1;
 const PERMISSION_ALUNO = 2;
@@ -20,10 +18,10 @@ function Logued(?Int $permission = null)
 {
     if (isset($_SESSION[SESSION_USER_ID]) && $_SESSION[SESSION_USER_ID] != "") {
         if ($permission != null)
-            if ($_SESSION[SESSION_USER_IDPERMISSION] != $permission)
+            if (getPermission() != $permission)
                 return false;
-        if (isset($_SESSION[SESSION_USERNAME]) || $_SESSION[SESSION_USERNAME] != "")
-            if (isset($_SESSION[SESSION_USER_IDPERMISSION]) || $_SESSION[SESSION_USER_IDPERMISSION] != "")
+        if (isset(getPermission()) || getPermission() != "")
+            if (isset(getPermission()) || getPermission() != "")
                 return true;
     }
     return false;
@@ -47,7 +45,6 @@ function logout()
     //Sair do usuario (deslogar)
     unset($_SESSION[SESSION_USER_ID]);
     unset($_SESSION[SESSION_USERNAME]);
-    unset($_SESSION[SESSION_USER_IDPERMISSION]);
     unset($_SESSION);
     session_destroy();
 }
@@ -192,10 +189,8 @@ class sessao{
     public function destroy(){
         if(session_status() === PHP_SESSION_ACTIVE){
             unset($_SESSION);
-            session_unset();
             session_destroy();
         }
-        //$this = null;
     }
 
 
