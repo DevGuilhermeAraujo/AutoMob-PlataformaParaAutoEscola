@@ -98,16 +98,27 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
             </p>
         </div>
         <?php
-            $db->executar("SELECT a.data_aula, a.horario_aula, c.marca, c.placa, vp.nome FROM agendamentos AS a JOIN  carros AS c ON a.carro_id = c.id JOIN usuariosvalids AS uv ON a.professor_id")
-
+        $result = $db->executar("SELECT a.id, DATE_FORMAT(a.data_aula, '%d/%m/%Y') AS data_aula, a.horario_aula, c.marca, c.placa, vp.nome FROM agendamentos AS a JOIN  carros AS c ON a.carro_id = c.id JOIN view_professores AS vp ON a.professor_id = vp.id WHERE a.aluno_id = 1", true);
+        if ($result->rowCount() == 0) {
+            echo '<p><span> Não há horários marcados para você </span </p>';
+        } else {
+            foreach ($result as $agendamento) {
+                $idAgendamento = $agendamento['id'];
+                $dataAula = $agendamento['data_aula'];
+                $horarioAula = $agendamento['horario_aula'];
+                $marcaCarro = $agendamento['marca'];
+                $placaCarro = $agendamento['placa'];
+                $nomeProfessor = $agendamento['nome'];
+                echo '<p>';
+                echo "<span>$dataAula $horarioAula</span>";
+                echo "<span>$marcaCarro</span>";
+                echo "<span>$placaCarro</span>";
+                echo "<span>$nomeProfessor</span>";
+                echo "<a href='../backEnd/processRemoverAgendamento.php?idAgendamento=$idAgendamento'><button>X</button></a>";
+                echo "</p>";
+            }
+        }
         ?>
-        <p>
-            <span>01/01/0001 12:00</span>
-            <span>Chevrolet/Camaro</span>
-            <span>abcd-1234</span>
-            <span>Professor</span>
-            <button>X</button>
-        </p>
     </div>
     <form method="POST">
         <h2><img id="Agenda" src="../Imgs/icoAgenda.png" alt="icone agendamento"> Agendar horário</h2>
@@ -144,5 +155,4 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
     }
     ?>
 </body>
-
 </html>

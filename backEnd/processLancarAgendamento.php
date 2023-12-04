@@ -5,6 +5,6 @@ if (isset($_GET['horario']) && isset($_GET['dtEscolhida']) && isset($_GET['veicE
     $horario = $_GET['horario'];
     $dtEscolhida = $_GET['dtEscolhida'];
     $veiculoEscolhido = $_GET['veicEscolhido'];
-    $db->executar("INSERT INTO agendamentos(aluno_id, carro_id, data_aula, horario_aula) VALUES(1, '$veiculoEscolhido', '$dtEscolhida', '$horario')");
+    $db->executar("INSERT INTO agendamentos(aluno_id, professor_id, carro_id, data_aula, horario_aula) VALUES(1, 6,'$veiculoEscolhido', '$dtEscolhida', '$horario')");
     header("location: ../Usuario/homeUsuario.php?sucess");
 }
