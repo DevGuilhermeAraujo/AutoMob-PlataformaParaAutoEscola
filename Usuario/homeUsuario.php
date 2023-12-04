@@ -1,12 +1,9 @@
 <?php
 include_once "../backEnd/conexao.php";
 $db = new Conexao;
-
 if (isset($_POST['data']) && isset($_POST['veiculo'])) {
-
     $dataEscolhida = $_POST['data'];
     $veiculoEscolhido = $_POST['veiculo'];
-
     function isDiaUtil($data)
     {
         // Converte a data para um objeto DateTime
@@ -16,11 +13,9 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
         // Retorna verdadeiro se for um dia útil (segunda a sexta)
         return ($diaSemana >= 1 && $diaSemana <= 5);
     }
-
     function obterHorariosDisponiveis($dataEscolhida)
     {
         global $db;
-
         // Verifica se a data escolhida é um dia útil
         if (isDiaUtil($dataEscolhida)) {
             // Lógica para gerar horários disponíveis nos dias úteis
@@ -35,7 +30,6 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
             // Se não for um dia útil, retorna um array vazio (fechado)
             $horariosDisponiveis = [];
         }
-
         // Agora, você pode consultar o banco de dados para obter os horários já agendados para a data escolhida
         $horariosAgendados = obterHorariosAgendados($dataEscolhida);
         // Remove os horários já agendados dos disponíveis
@@ -43,10 +37,8 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
             return (new DateTime($hora))->format('H:i');
         }, $horariosAgendados);
         $horariosDisponiveis = array_diff($horariosDisponiveis, $horariosAgendados);
-
         return $horariosDisponiveis;
     }
-
     // Função para obter os horários já agendados para uma data específica do banco de dados
     function obterHorariosAgendados($dataEscolhida)
     {
@@ -61,14 +53,12 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
         }
         return $horariosAgendados;
     }
-
     // Exemplo de uso:
     $horariosDisponiveis = obterHorariosDisponiveis($dataEscolhida);
 }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -76,7 +66,6 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
     <link rel="stylesheet" href="Usuario.css">
     <link rel="stylesheet" href="../index.css">
 </head>
-
 <body>
     <div class="Inicio">
         <h1>Olá, seja bem vindo <span>Fulanim... <!--Aqui deverá aparecer o nome do usuário--></span></h1>
