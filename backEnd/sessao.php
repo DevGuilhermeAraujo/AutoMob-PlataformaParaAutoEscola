@@ -20,8 +20,8 @@ function Logued(?Int $permission = null)
         if ($permission != null)
             if (getPermission() != $permission)
                 return false;
-        if (isset(getPermission()) || getPermission() != "")
-            if (isset(getPermission()) || getPermission() != "")
+        if (getPermission() != "")
+            if (getPermission() != "")
                 return true;
     }
     return false;
