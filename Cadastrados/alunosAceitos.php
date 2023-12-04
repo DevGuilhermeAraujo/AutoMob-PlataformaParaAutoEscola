@@ -8,6 +8,23 @@
     <link rel="stylesheet" href="Cadastrados.css">
 </head>
 <body>
-    Alunos
+   
+    <table >
+        <tr>
+        <th>CPF</th>
+        <th>Nome</th>
+        <th>Carro</th>
+        <th>Professor</th>
+        <th>Remover</th>
+        </tr>
+        <tr>
+            <td>...</td> 
+            <td>...</td> 
+            <td>...</td> 
+            <td>...</td>
+            <td><button>X</button></td>
+        </tr>
+
+</table>
 </body>
 </html>
