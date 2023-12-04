@@ -97,20 +97,10 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
                 <span>Remover</span>
             </p>
         </div>
-        <p>
-            <span>01/01/0001 12:00</span>
-            <span>Chevrolet/Camaro</span>
-            <span>abcd-1234</span>
-            <span>Professor</span>
-            <button>X</button>
-        </p>
-        <p>
-            <span>01/01/0001 12:00</span>
-            <span>Chevrolet/Camaro</span>
-            <span>abcd-1234</span>
-            <span>Professor</span>
-            <button>X</button>
-        </p>
+        <?php
+            $db->executar("SELECT a.data_aula, a.horario_aula, c.marca, c.placa, vp.nome FROM agendamentos AS a JOIN  carros AS c ON a.carro_id = c.id JOIN usuariosvalids AS uv ON a.professor_id")
+
+        ?>
         <p>
             <span>01/01/0001 12:00</span>
             <span>Chevrolet/Camaro</span>
@@ -141,12 +131,12 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
         <div id="horarios">
             <?php
             echo "<h2>$dataEscolhida</h2>";
-                if (empty($horariosDisponiveis)) {
-                    echo "<p>Fechado</p>";
-                } else {
+            if (empty($horariosDisponiveis)) {
+                echo "<p>Fechado</p>";
+            } else {
                 foreach ($horariosDisponiveis as $horario) {
                     echo "<i><a href='../backEnd/processLancarAgendamento.php?horario=$horario&dtEscolhida=$dataEscolhida&veicEscolhido=$veiculoEscolhido'>$horario</a></i>";
-                    }
+                }
             }
             ?>
         </div>
@@ -154,4 +144,5 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
     }
     ?>
 </body>
+
 </html>

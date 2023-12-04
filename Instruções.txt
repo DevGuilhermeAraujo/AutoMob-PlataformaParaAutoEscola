@@ -82,12 +82,24 @@ CREATE TABLE IF NOT EXISTS usuariosNoValids (
 CREATE TABLE IF NOT EXISTS agendamentos (
 id INT AUTO_INCREMENT PRIMARY KEY,
 aluno_id INT NOT NULL,
+professor_id INT NOT NULL,
 carro_id INT NOT NULL,
 data_aula DATE NOT NULL,
 horario_aula TIME NOT NULL,
 FOREIGN KEY (aluno_id) REFERENCES usuariosValids(id),
+FOREIGN KEY (professor_id) REFERENCES usuariosValids(id),
 FOREIGN KEY (carro_id) REFERENCES carros(id)
 );
+
+-- Tabela intermediária entre professores e carros
+CREATE TABLE log_professores_carros(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    professor_id INT NOT NULL,
+    carro_id INT NOT NULL,
+    data_atribuicao DATE NOT NULL,
+    FOREIGN KEY(professor_id) REFERENCES usuariosvalids(id),
+    FOREIGN KEY(carro_id) REFERENCES carros(id)
+    )
 
 --INSERT usuarios
 INSERT INTO usuariosvalids (nome, cpf, data_nascimento, endereco, telefone, email, tipo) VALUES
@@ -104,6 +116,16 @@ INSERT INTO usuariosvalids (nome, cpf, data_nascimento, endereco, telefone, emai
 
 INSERT INTO usuariosvalids (nome, cpf, data_nascimento, endereco, telefone, email, tipo) VALUES
 ('Camila Lima', '777.888.999-00', '1998-07-05', 'Rua E, 654', '(55) 98765-4321', 'camila@email.com', 2);
+
+INSERT INTO usuariosvalids (nome, cpf, data_nascimento, endereco, telefone, email, tipo) VALUES
+('Carlos Silva', '111.222.333-44', '1975-03-10', 'Rua X, 123', '(11) 98765-4321', 'carlos@email.com', 1);
+
+INSERT INTO usuariosvalids (nome, cpf, data_nascimento, endereco, telefone, email, tipo) VALUES
+('Fernanda Oliveira', '555.666.777-88', '1982-06-15', 'Avenida Y, 456', '(22) 98765-1234', 'fernanda@email.com', 1);
+
+INSERT INTO usuariosvalids (nome, cpf, data_nascimento, endereco, telefone, email, tipo) VALUES
+('Mariana Souza', '999.888.777-66', '1970-11-25', 'Rua Z, 789', '(33) 98765-5678', 'mariana@email.com', 1);
+
 
 
 --INSERT Carros
@@ -137,3 +159,8 @@ INSERT INTO agendamentos (aluno_id, carro_id, data_aula, horario_aula) VALUES
 
 ALTER TABLE usuariosnovalids ADD COLUMN senha VARCHAR(60) NOT NULL
 ALTER TABLE usuariosvalids ADD COLUMN senha VARCHAR(60) NOT NULL
+
+
+--CRIAÇÃO DE VIEWS
+CREATE VIEW view_professores AS(SELECT * FROM usuariosvalids WHERE tipo = 1)
+CREATE VIEW view_alunos AS(SELECT * FROM usuariosvalids WHERE tipo = 2)
