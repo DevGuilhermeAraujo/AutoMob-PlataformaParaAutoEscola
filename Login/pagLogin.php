@@ -48,6 +48,10 @@ if (Logued()) {
             <input type="text" name="telefone" placeholder="Telefone">
             <input type="email" id="email" name="email" placeholder="E-mail">
             <input type="password" id="senha" name="senha" placeholder="Senha">
+            <select name="tipo" id="">
+                <option value="1">Professor</option>
+                <option value="2">Aluno</option>
+            </select>
             <input style="background-color: #3636ca;color: white;" type="submit" value="Solicitar">
             <span onclick="trocar(painel2,painel1)">Voltar</span>
         </form>
