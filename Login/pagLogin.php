@@ -2,6 +2,8 @@
 //Deve estar presente em todas as paginas
 include_once '../BackEnd/sessao.php';
 include_once "../backEnd/modulos/permissionManager.php";
+include_once "../backEnd/conexao.php";
+$db = new Conexao();
 if (logued()) {
     redirectByPermission();
 }
@@ -51,8 +53,15 @@ if (logued()) {
             <input type="email" id="email" name="email" placeholder="E-mail">
             <input type="password" id="senha" name="senha" placeholder="Senha">
             <select name="tipo" id="">
-                <option value="1">Professor</option>
-                <option value="2">Aluno</option>
+                <option value="">Selecione um usuário</option>
+                <?php
+                    $result = $db->executar("SELECT id, tipoNome FROM tipos");
+                    foreach($result AS $tipos){
+                        $idTipo = $tipos['id'];
+                        $nomeTipo = $tipos['tipoNome'];
+                        echo "<option value='$idTipo'>$nomeTipo</option>";
+                    }
+                ?>
             </select>
             <input style="background-color: #3636ca;color: white;" type="submit" value="Solicitar">
             <span onclick="trocar(painel2,painel1)">Voltar</span>
