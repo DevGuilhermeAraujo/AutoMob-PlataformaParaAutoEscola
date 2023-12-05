@@ -36,7 +36,7 @@ requiredLogin(getDbUtils()->PERMISSION_INSTRUTOR());
             </p>
         </div>
         <?php
-        $result = getDb()->executar("SELECT data_aula, c.modelo as modelo, c.placa as placa, u.nome as nome FROM agendamentos as a JOIN carros as c ON c.id = a.carro_id JOIN usuarios as u ON u.id = a.Instrutor_id WHERE a.Instrutor_id = :id", true, false);
+        $result = getDb()->executar("SELECT a.id as id, data_aula, c.modelo as modelo, c.placa as placa, u.nome as nome FROM agendamentos as a JOIN carros as c ON c.id = a.carro_id JOIN usuarios as u ON u.id = a.Instrutor_id WHERE a.Instrutor_id = :id", true, false);
         $id = getId();
         $result->bindParam(":id", $id);
         $result->execute();
@@ -50,7 +50,7 @@ requiredLogin(getDbUtils()->PERMISSION_INSTRUTOR());
                     <span><?= $i['modelo'] ?></span>
                     <span><?= $i['placa'] ?></span>
                     <span><?= $i['nome'] ?></span>
-                    <button>X</button>
+                    <button><a href="../backEnd/processRemoverAgendamento.php?idAgendamento="<?= $i['id'] ?>>X</a></button>
                 </p>
         <?php
             }
