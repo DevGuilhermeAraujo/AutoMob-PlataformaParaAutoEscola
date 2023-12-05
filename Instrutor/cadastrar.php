@@ -32,7 +32,7 @@ $db = new Conexao();
     <div class="cad">
         <h2>Aceite um novo aluno</h2>
         <?php
-        $result = $db->executar("SELECT id, nome, cpf, endereco FROM usuariosvalids WHERE tipo = 2");
+        $result = $db->executar("SELECT id, nome, cpf, endereco FROM usuarios WHERE tipo = 3 AND validado = 0");
         foreach ($result as $usuario) {
             $idUser = $usuario['id'];
             $nome = $usuario['nome'];

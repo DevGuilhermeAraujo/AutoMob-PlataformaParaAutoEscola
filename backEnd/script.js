@@ -59,9 +59,10 @@ function validateForm() {
     return emailIsValid && passwordIsValid && nomelsValid && cpflsValid && datalsValid;
 }
 
+
 // Máscara para CPF (formato: XXX.XXX.XXX-XX)
-function maskCPF() {
-    document.getElementById('cpf').addEventListener('input', function (e) {
+function maskCPF(elementId) {
+    document.getElementById(elementId).addEventListener('input', function (e) {
         var target = e.target;
         var input = target.value.replace(/\D/g, '');
         var length = input.length;
@@ -79,4 +80,24 @@ function maskCPF() {
             target.value = input.slice(0, 3) + '.' + input.slice(3, 6) + '.' + input.slice(6, 9) + '-' + input.slice(9);
         }
     });
+}
+
+// MASCARA PARA NÚMERO TELEFONE FORMATO (00)00000-0000
+function maskTelefone(input) {
+    var digits = input.value.replace(/\D/g, '');
+    var formatted = '';
+
+    for (var i = 0; i < digits.length; i++) {
+        if (i === 0) {
+            formatted += '(' + digits[i];
+        } else if (i === 1) {
+            formatted += digits[i] + ')';
+        } else if (i === 7) {
+            formatted += '-' + digits[i];
+        } else {
+            formatted += digits[i];
+        }
+    }
+
+    input.value = formatted;
 }
