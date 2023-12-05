@@ -56,7 +56,7 @@ requiredLogin(getDbUtils()->PERMISSION_INSTRUTOR());
         <?php
             }
         }else{
-            echo "Nenhum horário cadastrado";
+            echo "<p><span> Não há horários marcados para você </span></p>";
         }
         ?>
         <!--
