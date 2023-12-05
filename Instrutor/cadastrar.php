@@ -32,16 +32,12 @@ $db = new Conexao();
     <div class="cad">
         <h2>Aceite um novo aluno</h2>
         <?php
-        $result = $db->executar("SELECT nome, cpf, data_nascimento, endereco, telefone, email, tipo, senha FROM usuariosnovalids");
+        $result = $db->executar("SELECT id, nome, cpf, endereco FROM usuariosvalids WHERE tipo = 2");
         foreach ($result as $usuario) {
+            $idUser = $usuario['id'];
             $nome = $usuario['nome'];
             $cpf = $usuario['cpf'];
-            $dtNascimento = $usuario['data_nascimento'];
             $endereco = $usuario['endereco'];
-            $telefone = $usuario['telefone'];
-            $email = $usuario['email'];
-            $tipo = $usuario['tipo'];
-            $senha = $usuario['senha'];
         ?>
             <div class="Usu">
                 <div class="ico">
@@ -52,8 +48,8 @@ $db = new Conexao();
                     echo "<p>$nome</p>";
                     echo "<p>$cpf</p>";
                     echo "<p>$endereco</p>";
-                    echo "<button style='background-color: green;'>Aceitar</button>";
-                    echo "<button style='background-color: red;'>Recusar</button>";
+                    echo "<a href='../backEnd/processNovoUsuario.php?idUser=$idUser&aceitar'><button style='background-color: green;'>Aceitar</button></a>";
+                    echo "<a href='../backEnd/processNovoUsuario.php?idUser=$idUser&recusar'><button style='background-color: red;'>Recusar</button></a>";
                     ?>
                 </div>
             </div>
