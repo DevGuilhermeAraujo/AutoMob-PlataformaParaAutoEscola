@@ -8,6 +8,42 @@
     <link rel="stylesheet" href="Cadastrados.css">
 </head>
 <body>
-    veiculos
+<div class="Inicio">
+        <h1>Olá, seja bem vindo <span></span></h1>
+    </div>
+    <div class="Nav">
+        <a href="../Login/pagLogin.php"><img class="iconeNav" src="../Imgs/icoSair.png" alt="icone sair"> Voltar</a>
+        <a href="../Cadastrados/alunosAceitos.php"><img class="iconeNav" src="../Imgs/icoUsuario.png" alt="icone usuários"> Alunos</a>
+        <a href="cadastrar.php"><img class="iconeNav" src="../Imgs/icoCadastro.png" alt="icone de cadastro">Cadastrar</a>
+    </div>
+<div class="Agenda">
+            <h2>Carros cadastrados</h2>
+            <div class="titulos">
+                <p>
+                    <span>CPF</span>
+                    <span>Carro</span>
+                    <span>Instrutor</span>
+                    <span>Remover</span>
+                </p>
+            </div>
+            <p>
+                <span>111.111.111-11</span>
+                <span>Ford Ka</span>
+                <span>Joao Instrutor</span>
+                <button>X</button>
+            </p>
+            <p>
+                <span></span>
+                <span></span>
+                <span></span>
+                <button>X</button>
+            </p>
+            <p>
+                <span></span>
+                <span></span>
+                <span></span>                
+                <button>X</button>
+            </p>
+        </div>
 </body>
 </html>
