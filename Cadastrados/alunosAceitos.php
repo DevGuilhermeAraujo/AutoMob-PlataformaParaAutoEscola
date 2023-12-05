@@ -1,3 +1,7 @@
+<?php 
+    include_once "../backEnd/sessao.php";
+    requiredLogin(getDbUtils()->PERMISSION_INSTRUTOR());
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
