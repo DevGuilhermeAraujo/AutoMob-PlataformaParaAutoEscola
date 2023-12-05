@@ -1,8 +1,7 @@
 <?php
 include_once '../BackEnd/sessao.php';
-include_once "../backEnd/modulos/permissionManager.php";
-include_once "../backEnd/conexao.php";
 requiredLogin(getDbUtils()->PERMISSION_ALUNO());  
+
 $db = new Conexao();
 $idUser = getId();
 if (isset($_POST['data']) && isset($_POST['veiculo'])) {

@@ -108,10 +108,8 @@ function logued(?int $tipoRequest = null)
 
 function destroySession()
 {
-    if (session_status() === PHP_SESSION_ACTIVE) {
-        unset($_SESSION);
-        session_destroy();
-    }
+    unset($_SESSION);
+    session_destroy();
 }
 
 /** 
