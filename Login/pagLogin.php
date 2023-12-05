@@ -1,8 +1,9 @@
 <?php
 //Deve estar presente em todas as paginas
 include_once '../BackEnd/sessao.php';
-if (Logued()) {
-    redirectByPermission(getPermission());
+include_once "../backEnd/modulos/permissionManager.php";
+if (logued()) {
+    redirectByPermission();
 }
 ?>
 <!DOCTYPE html>
@@ -18,15 +19,16 @@ if (Logued()) {
 </head>
 
 <body>
+    <?php echo (logued())?"sim":"não"; ?>
     <div id="titulo">
         <h1><img class="iconeTitulos" src="../Imgs/icoBandeira.png" alt="icone volante"> Auto escola Automob <img class="iconeTitulos" src="../Imgs/icoBandeira.png" alt="icone volante"></h1>
     </div>
     <div id="painel1" class="painelCentral">
-        <form action="" method="POST">
+        <form action="../backEnd/login/processLogin.php" method="POST">
             <h2>AUTOMOB</h2>
             <p><img class="icone" src="../Imgs/icoUsuario.png" alt="Icone usuario"> Acesse seu perfil:</p>
-            <input type="email" placeholder="E-mail">
-            <input type="password" placeholder="Senha">
+            <input type="text" name="User" placeholder="CPF">
+            <input type="password" name="Pass" placeholder="Senha">
             <input id="Logar" type="submit" value="Login">
             <span onclick="trocar(painel1,painel2)">Cadastre-se</span>
         </form>
