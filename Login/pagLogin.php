@@ -29,7 +29,7 @@ if (logued()) {
         <form action="../backEnd/login/processLogin.php" method="POST">
             <h2>AUTOMOB</h2>
             <p><img class="icone" src="../Imgs/icoUsuario.png" alt="Icone usuario"> Acesse seu perfil:</p>
-            <input type="text" id="cpf" name="User" placeholder="CPF" oninput="maskCPF()">
+            <input type="text" id="cpfLog" name="User" placeholder="CPF" oninput="maskCPF('cpfLog')">
             <input type="password" name="Pass" placeholder="Senha">
             <input id="Logar" type="submit" value="Login">
             <span onclick="trocar(painel1,painel2)">Cadastre-se</span>
@@ -48,8 +48,8 @@ if (logued()) {
             <input type="text" id="sobrenome" name="sobrenome" placeholder="Sobrenome">
             <input type="date" id="data" name="dtNascimento" placeholder="Data de nascimento">
             <input type="text" name="endereco" placeholder="Endereço">
-            <input type="text" id="cpf" name="cpf" placeholder="CPF" oninput="maskCPF()">
-            <input type="text" name="telefone" placeholder="Telefone">
+            <input type="text" id="cpfCad" name="cpf" placeholder="CPF" oninput="maskCPF('cpfCad')">
+            <input type="text" id="telefone" name="telefone" placeholder="Telefone" oninput="maskTelefone(this)" maxlength="14" minlength="14">
             <input type="email" id="email" name="email" placeholder="E-mail">
             <input type="password" id="senha" name="senha" placeholder="Senha">
             <select name="tipo" id="">
