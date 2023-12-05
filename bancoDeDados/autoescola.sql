@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04/12/2023 às 20:52
+-- Tempo de geração: 05/12/2023 às 08:50
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -32,7 +32,7 @@ USE `autoescola`;
 CREATE TABLE `agendamentos` (
   `id` int(11) NOT NULL,
   `aluno_id` int(11) NOT NULL,
-  `professor_id` int(11) NOT NULL,
+  `Instrutor_id` int(11) NOT NULL,
   `carro_id` int(11) NOT NULL,
   `data_aula` date NOT NULL,
   `horario_aula` time NOT NULL
@@ -66,12 +66,12 @@ INSERT INTO `carros` (`id`, `marca`, `modelo`, `ano`, `placa`, `capacidade_passa
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `log_professores_carros`
+-- Estrutura para tabela `log_instrutores_carros`
 --
 
-CREATE TABLE `log_professores_carros` (
+CREATE TABLE `log_instrutores_carros` (
   `id` int(11) NOT NULL,
-  `professor_id` int(11) NOT NULL,
+  `Instrutor_id` int(11) NOT NULL,
   `carro_id` int(11) NOT NULL,
   `data_atribuicao` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -120,12 +120,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `cpf`, `data_nascimento`, `endereco`, `telefone`, `email`, `senha`, `tipo`, `validado`) VALUES
-(1, 'Maria Silva', '123.456.789-01', '1990-05-15', 'Rua A, 123', '(11) 98765-4321', 'maria@email.com', '', 3, 0),
-(2, 'João Oliveira', '987.654.321-09', '1985-08-20', 'Avenida B, 456', '(22) 98765-1234', 'joao@email.com', '', 3, 0),
-(3, 'Ana Souza', '555.555.555-55', '1995-02-10', 'Rua C, 789', '(33) 98765-5678', 'ana@email.com', '', 3, 0),
-(4, 'Pedro Santos', '111.222.333-44', '1980-11-25', 'Avenida D, 987', '(44) 98765-8765', 'pedro@email.com', '', 3, 0),
-(5, 'Camila Lima', '777.888.999-00', '1998-07-05', 'Rua E, 654', '(55) 98765-4321', 'camila@email.com', '', 3, 0),
-(6, 'Carlos Silva', '111.222.333-44', '1975-03-10', 'Rua X, 123', '(11) 98765-4321', 'carlos@email.com', '', 2, 0);
+(1, 'Maria Silva', '111.111.111-11', '1990-05-15', 'Rua A, 123', '(11) 98765-4321', 'maria@email.com', '', 1, 0),
+(2, 'João Oliveira', '222.222.222-22', '1985-08-20', 'Avenida B, 456', '(22) 98765-1234', 'joao@email.com', '', 2, 0),
+(3, 'Ana Souza', '333.333.333-33', '1995-02-10', 'Rua C, 789', '(33) 98765-5678', 'ana@email.com', '', 3, 0);
 
 -- --------------------------------------------------------
 
@@ -149,10 +146,10 @@ CREATE TABLE `view_alunos` (
 -- --------------------------------------------------------
 
 --
--- Estrutura stand-in para view `view_professores`
+-- Estrutura stand-in para view `view_instrutores`
 -- (Veja abaixo para a visão atual)
 --
-CREATE TABLE `view_professores` (
+CREATE TABLE `view_instrutores` (
 `id` int(11)
 ,`nome` varchar(100)
 ,`cpf` varchar(14)
@@ -177,11 +174,11 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Estrutura para view `view_professores`
+-- Estrutura para view `view_instrutores`
 --
-DROP TABLE IF EXISTS `view_professores`;
+DROP TABLE IF EXISTS `view_instrutores`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_professores`  AS   (select `usuarios`.`id` AS `id`,`usuarios`.`nome` AS `nome`,`usuarios`.`cpf` AS `cpf`,`usuarios`.`data_nascimento` AS `data_nascimento`,`usuarios`.`endereco` AS `endereco`,`usuarios`.`telefone` AS `telefone`,`usuarios`.`email` AS `email`,`usuarios`.`senha` AS `senha`,`usuarios`.`tipo` AS `tipo`,`usuarios`.`validado` AS `validado` from `usuarios` where `usuarios`.`tipo` = 1)  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_instrutores`  AS   (select `usuarios`.`id` AS `id`,`usuarios`.`nome` AS `nome`,`usuarios`.`cpf` AS `cpf`,`usuarios`.`data_nascimento` AS `data_nascimento`,`usuarios`.`endereco` AS `endereco`,`usuarios`.`telefone` AS `telefone`,`usuarios`.`email` AS `email`,`usuarios`.`senha` AS `senha`,`usuarios`.`tipo` AS `tipo`,`usuarios`.`validado` AS `validado` from `usuarios` where `usuarios`.`tipo` = 1)  ;
 
 --
 -- Índices para tabelas despejadas
@@ -193,7 +190,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 ALTER TABLE `agendamentos`
   ADD PRIMARY KEY (`id`),
   ADD KEY `aluno_id` (`aluno_id`),
-  ADD KEY `professor_id` (`professor_id`),
+  ADD KEY `Instrutor_id` (`Instrutor_id`),
   ADD KEY `carro_id` (`carro_id`);
 
 --
@@ -203,11 +200,11 @@ ALTER TABLE `carros`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `log_professores_carros`
+-- Índices de tabela `log_instrutores_carros`
 --
-ALTER TABLE `log_professores_carros`
+ALTER TABLE `log_instrutores_carros`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `professor_id` (`professor_id`),
+  ADD KEY `Instrutor_id` (`Instrutor_id`),
   ADD KEY `carro_id` (`carro_id`);
 
 --
@@ -240,9 +237,9 @@ ALTER TABLE `carros`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de tabela `log_professores_carros`
+-- AUTO_INCREMENT de tabela `log_instrutores_carros`
 --
-ALTER TABLE `log_professores_carros`
+ALTER TABLE `log_instrutores_carros`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -255,7 +252,7 @@ ALTER TABLE `tipos`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restrições para tabelas despejadas
@@ -266,15 +263,15 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `agendamentos`
   ADD CONSTRAINT `agendamentos_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `usuarios` (`id`),
-  ADD CONSTRAINT `agendamentos_ibfk_2` FOREIGN KEY (`professor_id`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `agendamentos_ibfk_2` FOREIGN KEY (`Instrutor_id`) REFERENCES `usuarios` (`id`),
   ADD CONSTRAINT `agendamentos_ibfk_3` FOREIGN KEY (`carro_id`) REFERENCES `carros` (`id`);
 
 --
--- Restrições para tabelas `log_professores_carros`
+-- Restrições para tabelas `log_instrutores_carros`
 --
-ALTER TABLE `log_professores_carros`
-  ADD CONSTRAINT `log_professores_carros_ibfk_1` FOREIGN KEY (`professor_id`) REFERENCES `usuarios` (`id`),
-  ADD CONSTRAINT `log_professores_carros_ibfk_2` FOREIGN KEY (`carro_id`) REFERENCES `carros` (`id`);
+ALTER TABLE `log_instrutores_carros`
+  ADD CONSTRAINT `log_instrutores_carros_ibfk_1` FOREIGN KEY (`Instrutor_id`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `log_instrutores_carros_ibfk_2` FOREIGN KEY (`carro_id`) REFERENCES `carros` (`id`);
 
 --
 -- Restrições para tabelas `usuarios`
