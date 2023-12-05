@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05/12/2023 às 08:50
+-- Tempo de geração: 05/12/2023 às 20:32
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -52,16 +52,6 @@ CREATE TABLE `carros` (
   `placa` varchar(10) NOT NULL,
   `capacidade_passageiros` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `carros`
---
-
-INSERT INTO `carros` (`id`, `marca`, `modelo`, `ano`, `placa`, `capacidade_passageiros`) VALUES
-(1, 'Volkswagen', 'Gol', 2022, 'ABC1234', 5),
-(2, 'Ford', 'Fiesta', 2021, 'XYZ5678', 4),
-(3, 'Chevrolet', 'Onix', 2023, 'DEF9876', 5),
-(4, 'Toyota', 'Corolla', 2022, 'MNO5432', 5);
 
 -- --------------------------------------------------------
 
@@ -120,9 +110,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `cpf`, `data_nascimento`, `endereco`, `telefone`, `email`, `senha`, `tipo`, `validado`) VALUES
-(1, 'Maria Silva', '111.111.111-11', '1990-05-15', 'Rua A, 123', '(11) 98765-4321', 'maria@email.com', '', 1, 0),
-(2, 'João Oliveira', '222.222.222-22', '1985-08-20', 'Avenida B, 456', '(22) 98765-1234', 'joao@email.com', '', 2, 0),
-(3, 'Ana Souza', '333.333.333-33', '1995-02-10', 'Rua C, 789', '(33) 98765-5678', 'ana@email.com', '', 3, 0);
+(1, 'Instrutor', '000.000.000-00', '0000-00-00', 'Rua Carlos Diogo', '(34)00000-0000', 'Instrutor@gmail.com', '123456789', 2, 1),
+(2, 'Aluno', '111.111.111-11', '0000-00-00', 'Rua Carlos Diogo', '(34)00000-0000', 'Instrutor@gmail.com', '123456789', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -169,7 +158,7 @@ CREATE TABLE `view_instrutores` (
 --
 DROP TABLE IF EXISTS `view_alunos`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_alunos`  AS   (select `usuarios`.`id` AS `id`,`usuarios`.`nome` AS `nome`,`usuarios`.`cpf` AS `cpf`,`usuarios`.`data_nascimento` AS `data_nascimento`,`usuarios`.`endereco` AS `endereco`,`usuarios`.`telefone` AS `telefone`,`usuarios`.`email` AS `email`,`usuarios`.`senha` AS `senha`,`usuarios`.`tipo` AS `tipo`,`usuarios`.`validado` AS `validado` from `usuarios` where `usuarios`.`tipo` = 2)  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_alunos`  AS   (select `usuarios`.`id` AS `id`,`usuarios`.`nome` AS `nome`,`usuarios`.`cpf` AS `cpf`,`usuarios`.`data_nascimento` AS `data_nascimento`,`usuarios`.`endereco` AS `endereco`,`usuarios`.`telefone` AS `telefone`,`usuarios`.`email` AS `email`,`usuarios`.`senha` AS `senha`,`usuarios`.`tipo` AS `tipo`,`usuarios`.`validado` AS `validado` from `usuarios` where `usuarios`.`tipo` = (select `tipos`.`id` from `tipos` where ucase(`tipos`.`tipoNome`) = ucase('Aluno')))  ;
 
 -- --------------------------------------------------------
 
@@ -178,7 +167,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `view_instrutores`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_instrutores`  AS   (select `usuarios`.`id` AS `id`,`usuarios`.`nome` AS `nome`,`usuarios`.`cpf` AS `cpf`,`usuarios`.`data_nascimento` AS `data_nascimento`,`usuarios`.`endereco` AS `endereco`,`usuarios`.`telefone` AS `telefone`,`usuarios`.`email` AS `email`,`usuarios`.`senha` AS `senha`,`usuarios`.`tipo` AS `tipo`,`usuarios`.`validado` AS `validado` from `usuarios` where `usuarios`.`tipo` = 1)  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_instrutores`  AS   (select `usuarios`.`id` AS `id`,`usuarios`.`nome` AS `nome`,`usuarios`.`cpf` AS `cpf`,`usuarios`.`data_nascimento` AS `data_nascimento`,`usuarios`.`endereco` AS `endereco`,`usuarios`.`telefone` AS `telefone`,`usuarios`.`email` AS `email`,`usuarios`.`senha` AS `senha`,`usuarios`.`tipo` AS `tipo`,`usuarios`.`validado` AS `validado` from `usuarios` where `usuarios`.`tipo` = (select `tipos`.`id` from `tipos` where ucase(`tipos`.`tipoNome`) = ucase('Instrutor')))  ;
 
 --
 -- Índices para tabelas despejadas
@@ -218,6 +207,7 @@ ALTER TABLE `tipos`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `cpf` (`cpf`),
   ADD KEY `tipo` (`tipo`);
 
 --
@@ -234,7 +224,7 @@ ALTER TABLE `agendamentos`
 -- AUTO_INCREMENT de tabela `carros`
 --
 ALTER TABLE `carros`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `log_instrutores_carros`
@@ -252,7 +242,7 @@ ALTER TABLE `tipos`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restrições para tabelas despejadas
