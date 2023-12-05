@@ -55,58 +55,63 @@ ano INT NOT NULL,
 placa VARCHAR(10) NOT NULL,
 capacidade_passageiros INT NOT NULL
 );
+
+-- Tabela de tipos
+CREATE TABLE IF NOT EXISTS tipos(
+    id INT(1) PRIMARY KEY AUTO_INCREMENT,
+    tipoNome VARCHAR(20)
+    );
+-- Inserir em tipos
+INSERT INTO tipos (tipoNome) VALUES ("Gerente");
+INSERT INTO tipos (tipoNome) VALUES ("Instrutor");
+INSERT INTO tipos (tipoNome) VALUES ("Aluno");
+
 -- Tabela de Usuários
-CREATE TABLE IF NOT EXISTS usuariosValids(
+CREATE TABLE IF NOT EXISTS usuarios(
     id INT AUTO_INCREMENT PRIMARY KEY,
 	nome VARCHAR(100) NOT NULL,
-	cpf VARCHAR(14) NOT NULL,
+	cpf VARCHAR(14) NOT NULL UNIQUE,
 	data_nascimento DATE NOT NULL,
 	endereco VARCHAR(255) NOT NULL,
 	telefone VARCHAR(15) NOT NULL,
     email VARCHAR(50) NOT NULL,
-    tipo INT(1) NOT NULL
+    senha VARCHAR(60) NOT NULL,
+    tipo INT(1) NOT NULL,
+    validado INT(1) DEFAULT 0 NOT NULL,
+    FOREIGN KEY (tipo) REFERENCES tipos(id)
     );
--- Tabela de alunos
-Tabela usada para validação de usuarios(alunos), ou seja, o aluno ao se cadastrar no sistema, será cadastrado nessa tabela temporária onde o professor(adm do sistema) deverá validar esse usuário, se for validado, ele será apagado dessa tabela e direcionado a tabela usuariosValids
-CREATE TABLE IF NOT EXISTS usuariosNoValids (
-	id INT AUTO_INCREMENT PRIMARY KEY,
-	nome VARCHAR(100) NOT NULL,
-	cpf VARCHAR(14) NOT NULL,
-	data_nascimento DATE NOT NULL,
-	endereco VARCHAR(255) NOT NULL,
-	telefone VARCHAR(15) NOT NULL,
-    email VARCHAR(50) NOT NULL,
-    tipo INT(1) NOT NULL
-);
+
 -- Tabela de Agendamentos
 CREATE TABLE IF NOT EXISTS agendamentos (
 id INT AUTO_INCREMENT PRIMARY KEY,
 aluno_id INT NOT NULL,
+Instrutor_id INT NOT NULL,
 carro_id INT NOT NULL,
 data_aula DATE NOT NULL,
 horario_aula TIME NOT NULL,
-FOREIGN KEY (aluno_id) REFERENCES usuariosValids(id),
+FOREIGN KEY (aluno_id) REFERENCES usuarios(id),
+FOREIGN KEY (Instrutor_id) REFERENCES usuarios(id),
 FOREIGN KEY (carro_id) REFERENCES carros(id)
 );
 
---INSERT usuarios
-INSERT INTO usuariosvalids (nome, cpf, data_nascimento, endereco, telefone, email, tipo) VALUES
-('Maria Silva', '123.456.789-01', '1990-05-15', 'Rua A, 123', '(11) 98765-4321', 'maria@email.com', 2);
+-- Tabela intermediária entre Instrutores e carros
+CREATE TABLE IF NOT EXISTS log_Instrutores_carros(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    Instrutor_id INT NOT NULL,
+    carro_id INT NOT NULL,
+    data_atribuicao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(Instrutor_id) REFERENCES usuarios(id),
+    FOREIGN KEY(carro_id) REFERENCES carros(id)
+    );
 
-INSERT INTO usuariosvalids (nome, cpf, data_nascimento, endereco, telefone, email, tipo) VALUES
-('João Oliveira', '987.654.321-09', '1985-08-20', 'Avenida B, 456', '(22) 98765-1234', 'joao@email.com', 2);
+-- INSERT usuarios
+INSERT INTO usuarios(nome, cpf, data_nascimento, endereco, telefone, email, senha, tipo, validado) VALUES('Instrutor', '000.000.000-00', '27/02/2002', 'Rua Carlos Diogo', '(34)00000-0000', 'Instrutor@gmail.com', '123456789', 2, 1);
 
-INSERT INTO usuariosvalids (nome, cpf, data_nascimento, endereco, telefone, email, tipo) VALUES
-('Ana Souza', '555.555.555-55', '1995-02-10', 'Rua C, 789', '(33) 98765-5678', 'ana@email.com', 2);
-
-INSERT INTO usuariosvalids (nome, cpf, data_nascimento, endereco, telefone, email, tipo) VALUES
-('Pedro Santos', '111.222.333-44', '1980-11-25', 'Avenida D, 987', '(44) 98765-8765', 'pedro@email.com', 2);
-
-INSERT INTO usuariosvalids (nome, cpf, data_nascimento, endereco, telefone, email, tipo) VALUES
-('Camila Lima', '777.888.999-00', '1998-07-05', 'Rua E, 654', '(55) 98765-4321', 'camila@email.com', 2);
+INSERT INTO usuarios(nome, cpf, data_nascimento, endereco, telefone, email, senha, tipo, validado) VALUES('Aluno', '111.111.111-11', '27/02/2002', 'Rua Carlos Diogo', '(34)00000-0000', 'Instrutor@gmail.com', '123456789', 3, 1);
 
 
---INSERT Carros
+
+-- INSERT Carros
 INSERT INTO carros (marca, modelo, ano, placa, capacidade_passageiros) VALUES
 ('Volkswagen', 'Gol', 2022, 'ABC1234', 5);
 
@@ -120,19 +125,20 @@ INSERT INTO carros (marca, modelo, ano, placa, capacidade_passageiros) VALUES
 ('Toyota', 'Corolla', 2022, 'MNO5432', 5);
 
 
---INSERT agendamentos
-INSERT INTO agendamentos (aluno_id, carro_id, data_aula, horario_aula) VALUES
-(1, 1, '2023-10-10', '08:00:00');
+-- INSERT agendamentos
+INSERT INTO agendamentos (aluno_id, Instrutor_id, carro_id, data_aula, horario_aula) VALUES
+(1, 1, 1, '2023-10-10', '08:00:00');
 
-INSERT INTO agendamentos (aluno_id, carro_id, data_aula, horario_aula) VALUES
-(2, 2, '2023-10-10', '10:30:00');
+INSERT INTO agendamentos (aluno_id, Instrutor_id, carro_id, data_aula, horario_aula) VALUES
+(2, 2, 2, '2023-10-10', '10:30:00');
 
-INSERT INTO agendamentos (aluno_id, carro_id, data_aula, horario_aula) VALUES
-(3, 3, '2023-10-10', '13:00:00');
+INSERT INTO agendamentos (aluno_id, Instrutor_id, carro_id, data_aula, horario_aula) VALUES
+(3, 3, 3, '2023-10-10', '13:00:00');
 
-INSERT INTO agendamentos (aluno_id, carro_id, data_aula, horario_aula) VALUES
-(4, 4, '2023-10-10', '15:30:00');
+INSERT INTO agendamentos (aluno_id, Instrutor_id, carro_id, data_aula, horario_aula) VALUES
+(4, 4, 4, '2023-10-10', '15:30:00');
 
 
-
-ALTER TABLE agendamentos MODIFY COLUMN horario_aula TIME DEFAULT '00:00';
+-- CRIAÇÃO DE VIEWS
+CREATE OR REPLACE VIEW view_Instrutores AS(SELECT * FROM usuarios WHERE tipo = (SELECT id FROM tipos WHERE UPPER(tipoNome) = UPPER("Instrutor")));
+CREATE OR REPLACE VIEW view_alunos AS(SELECT * FROM usuarios WHERE tipo = (SELECT id FROM tipos WHERE UPPER(tipoNome) = UPPER("Aluno")));

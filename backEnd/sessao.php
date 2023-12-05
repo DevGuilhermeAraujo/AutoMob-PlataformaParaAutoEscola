@@ -1,103 +1,198 @@
-<<<<<<< HEAD
 <?php
+include_once "conexao.php";
+include_once "modulos/dbUtils.php";
+include_once "modulos/dbValidateUser.php";
+include_once "modulos/permissionManager.php";
 session_start();
 //Constantes de ambiente
+//Legado - Remover posteriormente
 const SESSION_USER_ID = "UserId";
 const SESSION_USERNAME = "UserName";
-//Legado (Falha de segurança) - Retirar em breve
-const SESSION_USER_IDPERMISSION = "UserIdPermission";
+const SESSION_CPF = "UserCpf";
 
-const PERMISSION_INSTRUTOR = 1;
-const PERMISSION_ALUNO = 2;
+class Sessao
+{
 
-//Pegar diretamente do banco:
-//function PERMISSION_GERENTE(){include_once "conexao.php"; return (new Conexao())->executar("SELECT cod FROM tipos WHERE nomeTipo='Gerente';")[0][0];}
-//function PERMISSION_PROFESSOR(){include_once "conexao.php"; return (new Conexao())->executar("SELECT cod FROM tipos WHERE nomeTipo='Aluno';")[0][0];}
-//function PERMISSION_ALUNO(){include_once "conexao.php"; return (new Conexao())->executar("SELECT cod FROM tipos WHERE nomeTipo='Aluno';")[0][0];}
+    function __construct()
+    {
+    }
 
+    /** 
+     * @return int
+     */
+    function getId()
+    {
+        return getId();
+    }
+
+    /** 
+     * @return string
+     */
+    function getNome()
+    {
+        return getNome();
+    }
+
+    /** 
+     * @return string
+     */
+    function getCpf()
+    {
+        return getCpf();
+    }
+
+    /** 
+     * @return int
+     */
+    function getTipoInt()
+    {
+        return getTipoInt();
+    }
+
+    /** 
+     * @return string
+     */
+    function getTipoStr()
+    {
+        return getTipoStr();
+    }
+
+    function getDbUtils()
+    {
+        return getDbUtils();
+    }
+
+    function destroy()
+    {
+        return destroySession();
+    }
+
+    function logued(?int $tipoRequest = null)
+    {
+        return logued($tipoRequest);
+    }
+}
 
 //Funções para o Front-End
-function Logued(?Int $permission = null)
+
+function setSessionVars(ValidaUsuario $user)
 {
-    if (isset($_SESSION[SESSION_USER_ID]) && $_SESSION[SESSION_USER_ID] != "") {
-        if ($permission != null)
-            if ($_SESSION[SESSION_USER_IDPERMISSION] != $permission)
-                return false;
-        if (isset($_SESSION[SESSION_USERNAME]) || $_SESSION[SESSION_USERNAME] != "")
-            if (isset($_SESSION[SESSION_USER_IDPERMISSION]) || $_SESSION[SESSION_USER_IDPERMISSION] != "")
-                return true;
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+
+    $_SESSION[SESSION_USER_ID] = $user->getId();
+    $_SESSION[SESSION_USERNAME] = $user->getNome();
+    $_SESSION[SESSION_CPF] = $user->getCpf();
+}
+
+function verifSessionVars()
+{
+    if (isset($_SESSION[SESSION_USER_ID]) && isset($_SESSION[SESSION_USERNAME]) && isset($_SESSION[SESSION_CPF])) {
+        return true;
     }
     return false;
 }
 
-function requiredLogin(?Int $permission = null, ?String $URL = null)
+function logued(?int $tipoRequest = null)
 {
-    if (!Logued($permission)) {
-        if (is_null($URL)) {
-            header("Location: ../Login/pagLogin.php");
-            exit();
-        } else {
-            header("Location: " . $URL);
-            exit();
-        }
+    if (session_status() === PHP_SESSION_ACTIVE && verifSessionVars()) {
+        if ($tipoRequest != null)
+            if (getTipoInt() != $tipoRequest) {
+                return false;
+            }
+        return true;
     }
+    return false;
 }
 
-function logout()
+function destroySession()
 {
-    //Sair do usuario (deslogar)
-    unset($_SESSION[SESSION_USER_ID]);
-    unset($_SESSION[SESSION_USERNAME]);
-    unset($_SESSION[SESSION_USER_IDPERMISSION]);
     unset($_SESSION);
     session_destroy();
 }
 
-function redirectByPermission($_permission)
+/** 
+ * @return Conexao
+ */
+function getDb()
 {
-    if ($_permission == PERMISSION_ALUNO) {
-        //header("Location: ")
-        header("Location: ../Usuario/homeUsuario.php");
-        exit();
-    }
-    if ($_permission == PERMISSION_INSTRUTOR) {
-        header("Location: ../Instrutor/homeInstrutor.php");
-        exit();
-    }
-    // if ($_permission == PERMISSION_GERENTE) {
-    //     header("Location: ../Gerente/indexGerente.php");
-    //     exit();
-    // }
-    //Se algo der errado
-    //Limpar sessão e reportar erro
-    error_log("Falha ao tentar fazer login, Cógido = Erro processLogin, return 2, Erro: Não foi possivel determinar o tipo do usuário; Falha ocorreu na tentativa do usuário: id=" . $_SESSION[SESSION_USER_ID] . ", Falha de permissão retornado=$_permission", 3, "C:\PhpSiteEscolaErrorsLog.log");
-    logout();
-    header("Location: ../Login/pagLogin.php?ERROR=2");
+    return new Conexao();
+}
+
+/** 
+ * @return dbUtils
+ */
+function getDbUtils()
+{
+    return new dbUtils(getDb());
 }
 
 
+/** 
+ * @return int
+ */
 function getId()
 {
     return $_SESSION[SESSION_USER_ID];
 }
 
+/** 
+ * @return string
+ */
 function getNome()
 {
     return $_SESSION[SESSION_USERNAME];
 }
 
-function getPermission()
+/** 
+ * @return string
+ */
+function getCpf()
 {
-    //return $_SESSION[SESSION_USER_IDPERMISSION];
-    try{
-        include_once "conexao.php";
-        $db = new Conexao();
-        return $db->executar("SELECT tipo FROM usuarios WHERE ra = '".$_SESSION[SESSION_USER_ID]."'")[0][0];
-    }catch(Exception $e){
-        logout();
-        header("Location: ../Login/pagLogin.php?ERROR=3");
-        exit();
+    return $_SESSION[SESSION_CPF];
+}
+
+/** 
+ * @return int
+ */
+function getTipoInt()
+{
+    try {
+        return getDb()->executar("SELECT tipo FROM usuarios WHERE id = '" . getId() . "'")[0][0];
+    } catch (Exception $e) {
+        //throw new ErrorException($e);
     }
+    return null;
+}
+
+/** 
+ * @return string
+ */
+function getTipoStr()
+{
+    try {
+        return getDb()->executar("SELECT t.nomeTipo FROM usuarios as u JOIN tipos as t ON u.tipo = t.id WHERE id = '" . getId() . "'")[0][0];
+    } catch (Exception $e) {
+        //throw new ErrorException($e);
+    }
+    return null;
+}
+
+function requiredLogin(?Int $permission = null, ?String $URL = null)
+{
+    (new permissonManager(new Sessao()))->requeridLogin($permission, $URL);
+}
+
+function logout()
+{
+    //Sair do usuario (deslogar)
+    destroySession();
+}
+
+function redirectByPermission()
+{
+    (new permissonManager(new Sessao))->redirect();
 }
 
 
@@ -130,100 +225,24 @@ function msg(int $type, string $message, ?string $class = "", ?string $style = "
             throw new Exception('Entrada invalida na função msg().');
     }
 
-    if(!$hideTimer == 0){
+    if (!$hideTimer == 0) {
         //Se a menssagem vai desaparecer
         //Tenta inserir o javascript caso não esteja na pagina (melhorar depois)
-        if($importJsUri == null){
+        if ($importJsUri == null) {
             //Tenta importar de um caminho padrão
             echo '<script src="../BackEnd/script.js"></script>';
-        }else{
+        } else {
             //Importa de um caminho determinado
-            echo '<script src="'.$importJsUri.'"></script>';
+            echo '<script src="' . $importJsUri . '"></script>';
         }
         //Chamar o metodo javascript para interação no lado cliente
         echo "<script>deleteMsg($hideTimer,$id);</script>";
     }
 }
 
-function redirectPOST(string $url, string $values, ?string $importJsUri = "../BackEnd/script.js"){
+function redirectPOST(string $url, string $values, ?string $importJsUri = "../BackEnd/script.js")
+{
     echo "<script src='$importJsUri'></script>";
     //Chamar o metodo javascript para interação no lado cliente
     echo "<script>redirectPOSTAjax('$url', '$values');</script>";
 }
-=======
-<?php 
-
-const SESSION_VAR = "SESSIONDATA";
-
-function session(){
-    return $_SESSION[SESSION_VAR];
-}
-
-class sessao{
-
-    private int $id;
-    private string $nome;
-    private string $cpf;
-
-    /**
-     * Cria a sessão  se ela não existir ou sobrescreve
-     * @param int $id
-     * @param string $nome
-     * @param string $cpf
-     */
-    function __construct($id, $nome, $cpf)
-    {
-        if(session_status() !== PHP_SESSION_ACTIVE){
-            session_start();
-        }
-
-        $this->id = $id;
-        $this->nome = $nome;
-        $this->cpf = $cpf;
-
-        $_SESSION[SESSION_VAR] = $this;
-    }
-
-    public static function getSession(){
-        return $_SESSION[SESSION_VAR];
-    }
-
-    /**
-     * Destroi a sessão se ela existir
-     */
-    public function destroy(){
-        if(session_status() === PHP_SESSION_ACTIVE){
-            unset($_SESSION);
-            session_unset();
-            session_destroy();
-        }
-        //$this = null;
-    }
-
-
-    /** 
-     * @return int
-    */
-    public function getid(){
-        return $this->id;
-    }
-
-    /** 
-     * @return string
-    */
-    public function getNome(){
-        return $this->nome;
-    }
-
-    /** 
-     * @return string
-    */
-    public function getCpf(){
-        return $this->cpf;
-    }
-
-
-}
-
-?>
->>>>>>> 24fb23abbcc9ceae1d97c61d2e96c7fc7a4fadb9
