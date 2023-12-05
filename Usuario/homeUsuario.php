@@ -83,8 +83,8 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
     </div>
     <div class="Nav">
         <a href="../Login/pagLogin.php"><img class="iconeNav" src="../Imgs/icoSair.png" alt="icone sair"> Voltar</a>
-        <a href=""><img class="iconeNav" src="../Imgs/icoVolante.png" alt="icone veículos"> Veículos</a>
-        <a href=""><img class="iconeNav" src="../Imgs/icoUsuario.png" alt="icone usuários"> Alunos</a>
+        <a href="../Cadastrados/Veiculos.php"><img class="iconeNav" src="../Imgs/icoVolante.png" alt="icone veículos"> Veículos</a>
+        <a href="../Cadastrados/alunosAceitos.php"><img class="iconeNav" src="../Imgs/icoUsuario.png" alt="icone usuários"> Alunos</a>
     </div>
     <div class="Agenda">
         <h2>Meus horários</h2>
