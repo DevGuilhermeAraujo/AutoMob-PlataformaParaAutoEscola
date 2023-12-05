@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS log_Instrutores_carros(
     id INT PRIMARY KEY AUTO_INCREMENT,
     Instrutor_id INT NOT NULL,
     carro_id INT NOT NULL,
-    data_atribuicao DATE NOT NULL,
+    data_atribuicao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY(Instrutor_id) REFERENCES usuarios(id),
     FOREIGN KEY(carro_id) REFERENCES carros(id)
     );

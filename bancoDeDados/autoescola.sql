@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05/12/2023 às 20:32
+-- Tempo de geração: 05/12/2023 às 20:41
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -63,7 +63,7 @@ CREATE TABLE `log_instrutores_carros` (
   `id` int(11) NOT NULL,
   `Instrutor_id` int(11) NOT NULL,
   `carro_id` int(11) NOT NULL,
-  `data_atribuicao` date NOT NULL
+  `data_atribuicao` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
