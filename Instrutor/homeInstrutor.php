@@ -12,6 +12,7 @@ requiredLogin(getDbUtils()->PERMISSION_INSTRUTOR());
     <title>HomeInstrutor</title>
     <link rel="stylesheet" href="../index.css">
     <link rel="stylesheet" href="Instrutor.css">
+    <script src="../backEnd/script.js"></script>
 </head>
 
 <body>
@@ -36,21 +37,21 @@ requiredLogin(getDbUtils()->PERMISSION_INSTRUTOR());
             </p>
         </div>
         <?php
-        $result = getDb()->executar("SELECT a.id as id, data_aula, c.modelo as modelo, c.placa as placa, u.nome as nome FROM agendamentos as a JOIN carros as c ON c.id = a.carro_id JOIN usuarios as u ON u.id = a.Instrutor_id WHERE a.Instrutor_id = :id", true, false);
+        $result = getDb()->executar("SELECT a.id as id, DATE_FORMAT(a.data_aula, '%d/%m/%Y') as data_aula, a.horario_aula as horario_aula, c.marca as marca, c.placa as placa, u.nome as nome FROM agendamentos as a JOIN carros as c ON c.id = a.carro_id JOIN usuarios as u ON u.id = a.Instrutor_id WHERE a.Instrutor_id = :id", true, false);
         $id = getId();
         $result->bindParam(":id", $id);
         $result->execute();
         if ($result->rowCount() > 0) {
             $result = $result->fetchAll();
 
-            foreach ($$result as $i) {
+            foreach ($result as $i) {
         ?>
                 <p>
-                    <span><?= $i['data_aula'] ?></span>
-                    <span><?= $i['modelo'] ?></span>
+                    <span><?= $i['data_aula']." ".$i['horario_aula'] ?></span>
+                    <span><?= $i['marca'] ?></span>
                     <span><?= $i['placa'] ?></span>
                     <span><?= $i['nome'] ?></span>
-                    <button><a href="../backEnd/processRemoverAgendamento.php?idAgendamento="<?= $i['id'] ?>>X</a></button>
+                    <button onclick='let msg1 = new MsgBox(); msg1.showInLine({_idName: "msg11", _type: msg1.SET_TYPE_TEXT ,_title: "Excluir horário?", _menssagem: "Tem certeza que deseja excluir este horário?", _btnOkName: "Sim", _btnOkHref: "../backEnd/processRemoverAgendamento.php?idAgendamento=<?= $i["id"] ?>", _btnCancelName: "Cancelar", _autoDestroy: true});'>X</button>
                 </p>
         <?php
             }

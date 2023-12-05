@@ -68,6 +68,7 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
     <title>HomeUsuario</title>
     <link rel="stylesheet" href="Usuario.css">
     <link rel="stylesheet" href="../index.css">
+    <script src="../backEnd/script.js"></script>
 </head>
 <body>
     <div class="Inicio">
@@ -92,7 +93,7 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
         <?php
         $result = $db->executar("SELECT a.id, DATE_FORMAT(a.data_aula, '%d/%m/%Y') AS data_aula, a.horario_aula, c.marca, c.placa, vi.nome FROM agendamentos AS a JOIN  carros AS c ON a.carro_id = c.id JOIN view_instrutores AS vi ON a.Instrutor_id = vi.id WHERE a.aluno_id = '$idUser'", true);
         if ($result->rowCount() == 0) {
-            echo '<p><span> Não há horários marcados para você </span </p>';
+            echo '<p><span> Não há horários marcados para você </span> </p>';
         } else {
             foreach ($result as $agendamento) {
                 $idAgendamento = $agendamento['id'];
@@ -106,7 +107,8 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
                 echo "<span>$marcaCarro</span>";
                 echo "<span>$placaCarro</span>";
                 echo "<span>$nomeProfessor</span>";
-                echo "<a href='../backEnd/processRemoverAgendamento.php?idAgendamento=$idAgendamento'><button>X</button></a>";
+                //echo "<a href='../backEnd/processRemoverAgendamento.php?idAgendamento=$idAgendamento'><button>X</button></a>";
+                echo "<button onclick='let msg1 = new MsgBox(); msg1.showInLine({_idName: \"msg11\", _type: msg1.SET_TYPE_TEXT ,_title: \"Excluir horário?\", _menssagem: \"Tem certeza que deseja excluir este horário?\", _btnOkName: \"Sim\", _btnOkHref: \"../backEnd/processRemoverAgendamento.php?idAgendamento=".$idAgendamento."\", _btnCancelName: \"Cancelar\", _autoDestroy: true});'>X</button>";
                 echo "</p>";
             }
         }
