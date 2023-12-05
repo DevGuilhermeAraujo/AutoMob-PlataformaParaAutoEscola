@@ -29,7 +29,7 @@ if (logued()) {
         <form action="../backEnd/login/processLogin.php" method="POST">
             <h2>AUTOMOB</h2>
             <p><img class="icone" src="../Imgs/icoUsuario.png" alt="Icone usuario"> Acesse seu perfil:</p>
-            <input type="text" name="User" placeholder="CPF">
+            <input type="text" id="cpf" name="User" placeholder="CPF" oninput="maskCPF()">
             <input type="password" name="Pass" placeholder="Senha">
             <input id="Logar" type="submit" value="Login">
             <span onclick="trocar(painel1,painel2)">Cadastre-se</span>
