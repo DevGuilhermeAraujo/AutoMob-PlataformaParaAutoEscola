@@ -77,12 +77,7 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
     </div>
     -->
     <?= HTML::getInicioPage() ?>
-    
-    <div class="Nav">
-        
-        <a href="../backEnd/logout.php"><img class="iconeNav" src="../Imgs/icoSair.png" alt="icone sair"> Sair</a>
-       
-    </div>
+        <a id="sair" href="../backEnd/logout.php"><img class="iconeNav" src="../Imgs/icoSair.png" alt="icone sair"> Sair</a>
     <div class="Agenda">
         <h2>Meus horários</h2>
         <div class="titulos">
@@ -120,7 +115,7 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
     </div>
     <form method="POST">
         <h2><img id="Agenda" src="../Imgs/icoAgenda.png" alt="icone agendamento"> Agendar horário</h2>
-        <select name="veiculo" required>
+        <select id="sel" name="veiculo" required>
             <option value="">Veículo</option>
             <?php
             $result = $db->executar("SELECT id, modelo FROM carros");

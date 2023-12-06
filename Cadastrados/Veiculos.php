@@ -19,9 +19,9 @@ include_once "../backEnd/sessao.php";
                 _type: msg1.SET_TYPE_TEXT,
                 _title: "Excluir veículo?",
                 _menssagem: "Tem certeza que deseja excluir o veículo " + text + "?",
-                _btnOkName: "Sim",
+                _btnOkName: "<i>Excluir</i>",
                 _btnOkAction: "sentAjaxGET('../backEnd/processRemoverCarro.php', 'idCarro=" + id + "');",
-                _btnCancelName: "Cancelar",
+                _btnCancelName: "<i>Cancelar</i>",
                 _autoDestroy: true
             });
         }
@@ -42,7 +42,6 @@ include_once "../backEnd/sessao.php";
                 <span>Marca</span>
                 <span>Modelo</span>
                 <span>Ano</span>
-                <span>Capacidade de passageiros</span>
                 <span>Placa</span>
                 <span>Remover</span>
             </p>
@@ -58,30 +57,16 @@ include_once "../backEnd/sessao.php";
                     <span><?= $i['marca'] ?></span>
                     <span><?= $i['modelo'] ?></span>
                     <span><?= $i['ano'] ?></span>
-                    <span><?= $i['capacidade'] ?></span>
                     <span><?= $i['placa'] ?></span>
                     <button onclick="removerCadastroMenssage(<?= $i['id'] ?>,'<?= ($i['marca'].' '.$i['modelo']) ?>');">X</button>
                 </p>
         <?php
             }
         } else {
-            echo "<p><span> Não há veículos cadastrados </span></p>";
+            echo "<p>Não há veículos cadastrados</p>";
         }
         ?>
-        <!--
-        <p>
-            <span></span>
-            <span></span>
-            <span></span>
-            <button>X</button>
-        </p>
-        <p>
-            <span></span>
-            <span></span>
-            <span></span>
-            <button>X</button>
-        </p>
-        -->
+
     </div>
 </body>
 
