@@ -10,15 +10,15 @@ if (isset($_GET['editarUsuario'])) {
     $senhaAtual = $_POST['senhaAtual'];
     if ($senha == $confirmSenha) {
         $result = getDb()->executar("SELECT * FROM usuarios WHERE senha = '$senhaAtual'", true);
-        if ($result->rowCount() > 0) {
-            $result = getDb()->executar("UPDATE usuarios SET telefone = '$telefone', email = '$email', senha = '$senha' WHERE id = '$idUser'", true);
+        if ($result->rowCount() > 0 || password_verify($senhaAtual,getDb()->executar("SELECT senha FROM usuarios WHERE id = '$idUser'")[0][0])) {
+            $result = getDb()->executar("UPDATE usuarios SET telefone = '$telefone', email = '$email', senha = '".password_hash($senha,PASSWORD_DEFAULT)."' WHERE id = '$idUser'", true);
             if ($result->rowCount() > 0) {
-                header("Location: ../Instrutor/homeInstrutor.php?editUserSucess");
+                header("Location: ../Usuario/homeUsuario.php?editUserSucess");
             }
         } else {
-            header("Location: ../Instrutor/homeInstrutor.php?editUserFailed");
+            header("Location: ../Usuario/homeUsuario.php?senhainvalida");
         }
     } else {
-        header("Location: ../Instrutor/homeInstrutor.php?senhainvalida");
+        header("Location: ../Usuario/homeUsuario.php?editUserFailed");
     }
 }

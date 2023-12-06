@@ -10,10 +10,10 @@ if(isset($_GET['editarcarro'])){
     $capacidade = $_POST['capacidade'];
     $result = getDb()->executar("UPDATE carros SET marca = '$marca', modelo = '$modelo', ano = '$ano', placa = '$placa', capacidade_passageiros = '$capacidade' WHERE id = '$idCarro'", true);
     if ($result->rowCount() > 0) {
-        header("Location: ../Instrutor/homeInstrutor.php?editCarSucess");
+        header("Location: ../Cadastrados/veiculos.php?editCarSucess");
         exit();
     } else {
-        header("Location: ../Instrutor/homeInstrutor.php?editCarFailed");
+        header("Location: ../Cadastrados/veiculos.php?editCarFailed");
         exit();
     }
 }
