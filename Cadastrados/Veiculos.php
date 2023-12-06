@@ -59,7 +59,7 @@ requiredLogin(getDbUtils()->PERMISSION_INSTRUTOR());
                     <span><?= $i['modelo'] ?></span>
                     <span><?= $i['ano'] ?></span>
                     <span><?= $i['placa'] ?></span>
-                    <a href="../Instrutor/editar.php?idCarro=<?= $i['id'] ?>"><button>E</button></a>
+                    <button style="background-color: #02024b; text-align: center; width: 7%;"><a style="text-decoration: none; color: white;" href="../Instrutor/editar.php?idCarro=<?= $i['id'] ?>">Editar</a></button>
                     <button onclick="removerCadastroMenssage(<?= $i['id'] ?>,'<?= ($i['marca'].' '.$i['modelo']) ?>');">X</button>
                 </p>
         <?php
