@@ -1,3 +1,6 @@
+<?php 
+    include_once "../backEnd/sessao.php";
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -8,9 +11,7 @@
     <link rel="stylesheet" href="Cadastrados.css">
 </head>
 <body>
-<div class="Inicio">
-        <h1>Olá, seja bem vindo <span></span></h1>
-    </div>
+    <?= HTML::getInicioPage() ?>
     <div class="Nav">
         <a href="../Login/pagLogin.php"><img class="iconeNav" src="../Imgs/icoSair.png" alt="icone sair"> Voltar</a>
         <a href="../Cadastrados/alunosAceitos.php"><img class="iconeNav" src="../Imgs/icoUsuario.png" alt="icone usuários"> Alunos</a>
