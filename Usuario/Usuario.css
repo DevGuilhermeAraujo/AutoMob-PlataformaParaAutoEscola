@@ -84,3 +84,31 @@ input,#sel{
     color: black;
     font-weight: 500;
 }
+#edt{
+    width: 90%;
+    margin-left: 5%;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    padding: 2%;
+}
+#edt img{
+    width: 25%;
+}
+#edt form{
+    width: 75%;
+    display: flex;
+    padding: 5%;
+    height: 45vh;
+    background-color: #02024b;
+}
+#edt form input{
+    width: 48%;
+    margin: 1%;
+    background-color: white;
+    color: #02024b;
+    padding: 2%;
+}
+#btnEdt{
+    background-color: gray;
+}
