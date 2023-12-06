@@ -9,7 +9,6 @@ include_once "../backEnd/sessao.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veiculos</title>
     <link rel="stylesheet" href="../index.css">
-    <link rel="stylesheet" href="Cadastrados.css">
     <script src="../backEnd/script.js"></script>
     <script>
         function removerCadastroMenssage(id, text) {
@@ -43,6 +42,7 @@ include_once "../backEnd/sessao.php";
                 <span>Modelo</span>
                 <span>Ano</span>
                 <span>Placa</span>
+                <span>Editar</span>
                 <span>Remover</span>
             </p>
         </div>
@@ -58,6 +58,7 @@ include_once "../backEnd/sessao.php";
                     <span><?= $i['modelo'] ?></span>
                     <span><?= $i['ano'] ?></span>
                     <span><?= $i['placa'] ?></span>
+                    <button>E</button>
                     <button onclick="removerCadastroMenssage(<?= $i['id'] ?>,'<?= ($i['marca'].' '.$i['modelo']) ?>');">X</button>
                 </p>
         <?php

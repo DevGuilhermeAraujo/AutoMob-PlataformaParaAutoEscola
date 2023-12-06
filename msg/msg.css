@@ -10,8 +10,11 @@
     margin-right: 3%;
     font-size: 18px;
     color: black;
-    background-color: rgb(255, 255, 255);
+    background-color: #02024b;
+    color: white;
     text-align: center;
+    padding: 2%;
+    width: 30%;
 }
 
 .janela-modal .msgCancelButton{
@@ -21,8 +24,11 @@
     width: 10%;
     font-size: 18px;
     color: black;
-    background-color: rgb(255, 255, 255);
+    background-color: #02024b;
+    color: white;
     text-align: center  ;
+    padding: 2%;
+    width: 30%;
 }
 
 .disableScroll{

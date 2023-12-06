@@ -93,7 +93,7 @@ $db = new Conexao();
         <?php
             }
         }else{
-            echo "<i>Nenhum aluno solicitou cadastro por enquanto</i>";
+            echo "<b>Nenhum aluno solicitou cadastro por enquanto</b>";
         }
         ?>
     </div>

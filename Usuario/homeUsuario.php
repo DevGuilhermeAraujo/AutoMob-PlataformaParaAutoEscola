@@ -77,7 +77,10 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
     </div>
     -->
     <?= HTML::getInicioPage() ?>
+    <div class="Nav">
         <a id="sair" href="../backEnd/logout.php"><img class="iconeNav" src="../Imgs/icoSair.png" alt="icone sair"> Sair</a>
+        <a id="editar" href="editar.php"><img class="iconeNav" src="../Imgs/icoEditar.png" alt="icone editar">Editar</a>
+    </div>
     <div class="Agenda">
         <h2>Meus horários</h2>
         <div class="titulos">
