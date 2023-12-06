@@ -10,7 +10,7 @@ $endereco = $_POST['endereco'];
 $cpf = $_POST['cpf'];
 $telefone = $_POST['telefone'];
 $email = $_POST['email'];
-$senha = $_POST['senha'];
+$senha = password_hash($_POST['senha'],PASSWORD_DEFAULT);
 $tipo = $_POST['tipo'];
 if ($db->errorCode === 0) {
     $db->executar("INSERT INTO usuarios(nome, cpf, data_nascimento, endereco, telefone, email, senha, tipo) VALUES('$nomeCompleto', '$cpf', '$dtNascimento', '$endereco', '$telefone', '$email', '$senha', '$tipo')");

@@ -88,7 +88,7 @@ requiredLogin(getDbUtils()->PERMISSION_INSTRUTOR());
             </p>
         </div>
         <?php
-        $result = getDb()->executar("SELECT id, cpf, nome, data_nascimento, idade, validado FROM view_alunos", true);
+        $result = getDb()->executar("SELECT id, cpf, nome, data_nascimento, idade, validado FROM view_alunos WHERE validado = 1", true);
         $id = getId();
         if ($result->rowCount() > 0) {
             $result = $result->fetchAll();
