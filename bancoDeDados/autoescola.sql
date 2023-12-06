@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05/12/2023 às 20:41
+-- Tempo de geração: 06/12/2023 às 08:15
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -130,6 +130,7 @@ CREATE TABLE `view_alunos` (
 ,`senha` varchar(60)
 ,`tipo` int(1)
 ,`validado` int(1)
+,`idade` int(6)
 );
 
 -- --------------------------------------------------------
@@ -149,6 +150,7 @@ CREATE TABLE `view_instrutores` (
 ,`senha` varchar(60)
 ,`tipo` int(1)
 ,`validado` int(1)
+,`idade` int(6)
 );
 
 -- --------------------------------------------------------
@@ -158,7 +160,7 @@ CREATE TABLE `view_instrutores` (
 --
 DROP TABLE IF EXISTS `view_alunos`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_alunos`  AS   (select `usuarios`.`id` AS `id`,`usuarios`.`nome` AS `nome`,`usuarios`.`cpf` AS `cpf`,`usuarios`.`data_nascimento` AS `data_nascimento`,`usuarios`.`endereco` AS `endereco`,`usuarios`.`telefone` AS `telefone`,`usuarios`.`email` AS `email`,`usuarios`.`senha` AS `senha`,`usuarios`.`tipo` AS `tipo`,`usuarios`.`validado` AS `validado` from `usuarios` where `usuarios`.`tipo` = (select `tipos`.`id` from `tipos` where ucase(`tipos`.`tipoNome`) = ucase('Aluno')))  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_alunos`  AS   (select `usuarios`.`id` AS `id`,`usuarios`.`nome` AS `nome`,`usuarios`.`cpf` AS `cpf`,`usuarios`.`data_nascimento` AS `data_nascimento`,`usuarios`.`endereco` AS `endereco`,`usuarios`.`telefone` AS `telefone`,`usuarios`.`email` AS `email`,`usuarios`.`senha` AS `senha`,`usuarios`.`tipo` AS `tipo`,`usuarios`.`validado` AS `validado`,year(curdate()) - year(`usuarios`.`data_nascimento`) - if(month(curdate()) * 32 + dayofmonth(curdate()) < month(`usuarios`.`data_nascimento`) * 32 + dayofmonth(`usuarios`.`data_nascimento`),1,0) AS `idade` from `usuarios` where `usuarios`.`tipo` = (select `tipos`.`id` from `tipos` where ucase(`tipos`.`tipoNome`) = ucase('Aluno')))  ;
 
 -- --------------------------------------------------------
 
@@ -167,7 +169,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `view_instrutores`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_instrutores`  AS   (select `usuarios`.`id` AS `id`,`usuarios`.`nome` AS `nome`,`usuarios`.`cpf` AS `cpf`,`usuarios`.`data_nascimento` AS `data_nascimento`,`usuarios`.`endereco` AS `endereco`,`usuarios`.`telefone` AS `telefone`,`usuarios`.`email` AS `email`,`usuarios`.`senha` AS `senha`,`usuarios`.`tipo` AS `tipo`,`usuarios`.`validado` AS `validado` from `usuarios` where `usuarios`.`tipo` = (select `tipos`.`id` from `tipos` where ucase(`tipos`.`tipoNome`) = ucase('Instrutor')))  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_instrutores`  AS   (select `usuarios`.`id` AS `id`,`usuarios`.`nome` AS `nome`,`usuarios`.`cpf` AS `cpf`,`usuarios`.`data_nascimento` AS `data_nascimento`,`usuarios`.`endereco` AS `endereco`,`usuarios`.`telefone` AS `telefone`,`usuarios`.`email` AS `email`,`usuarios`.`senha` AS `senha`,`usuarios`.`tipo` AS `tipo`,`usuarios`.`validado` AS `validado`,year(curdate()) - year(`usuarios`.`data_nascimento`) - if(month(curdate()) * 32 + dayofmonth(curdate()) < month(`usuarios`.`data_nascimento`) * 32 + dayofmonth(`usuarios`.`data_nascimento`),1,0) AS `idade` from `usuarios` where `usuarios`.`tipo` = (select `tipos`.`id` from `tipos` where ucase(`tipos`.`tipoNome`) = ucase('Instrutor')))  ;
 
 --
 -- Índices para tabelas despejadas

@@ -102,6 +102,35 @@ function maskTelefone(input) {
     input.value = formatted;
 }
 
+//Requisições AJAX
+/**@param {Function} onloadendAciton  */
+function sentAjaxPOST(URL, values, onloadendAciton){
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", URL, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onloadend = function() {
+        if(onloadendAciton == null)
+            location.reload();
+        else
+            onloadendAciton(xhr.responseText.replace(/<html[\s\S]*?>([\s\S]*?)<body>/, "").replace(/<\/body>([\s\S]*?)<\/html>/, "").replace("<!DOCTYPE html>",""));
+    }
+    xhr.send(values+"&noRedirect");
+}
+/**@param {string} values 
+ * @param {Function} onloadendAciton  */
+function sentAjaxGET(URL, values, onloadendAciton){
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", URL+"?"+values+"&noRedirect", true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onloadend = function() {
+        if(onloadendAciton == null)
+            location.reload();
+        else
+            onloadendAciton(xhr.responseText.replace(/<html[\s\S]*?>([\s\S]*?)<body>/, "").replace(/<\/body>([\s\S]*?)<\/html>/, "").replace("<!DOCTYPE html>",""));
+    }
+    xhr.send();
+}
+
 
 //Caixas de menssagens (modal)
 class MsgBox{
@@ -198,6 +227,7 @@ class MsgBox{
             var i = 0;
             while(i < 10)
                 try{
+                    i++;
                     await new Promise(r => setTimeout(r, 100));
                     window[this.idName].JS.abrir();
                     this.visible = true;

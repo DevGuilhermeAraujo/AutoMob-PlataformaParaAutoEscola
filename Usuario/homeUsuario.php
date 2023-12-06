@@ -71,13 +71,17 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
     <script src="../backEnd/script.js"></script>
 </head>
 <body>
+    <!--
     <div class="Inicio">
-        <h1>Olá, seja bem vindo <span><?= getNome() ?> <!--Aqui deverá aparecer o nome do usuário--></span></h1>
+        <h1>Olá, seja bem vindo <span><?= getNome() ?> //Aqui deverá aparecer o nome do usuário</span></h1>
     </div>
+    -->
+    <?= HTML::getInicioPage() ?>
+    
     <div class="Nav">
-        <a href="../Login/pagLogin.php"><img class="iconeNav" src="../Imgs/icoSair.png" alt="icone sair"> Voltar</a>
-        <a href="../Cadastrados/Veiculos.php"><img class="iconeNav" src="../Imgs/icoVolante.png" alt="icone veículos"> Veículos</a>
-        <a href="../Cadastrados/alunosAceitos.php"><img class="iconeNav" src="../Imgs/icoUsuario.png" alt="icone usuários"> Alunos</a>
+        
+        <a href="../backEnd/logout.php"><img class="iconeNav" src="../Imgs/icoSair.png" alt="icone sair"> Sair</a>
+       
     </div>
     <div class="Agenda">
         <h2>Meus horários</h2>

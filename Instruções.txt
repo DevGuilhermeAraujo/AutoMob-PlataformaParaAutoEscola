@@ -140,5 +140,8 @@ INSERT INTO agendamentos (aluno_id, Instrutor_id, carro_id, data_aula, horario_a
 
 
 -- CRIAÇÃO DE VIEWS
-CREATE OR REPLACE VIEW view_Instrutores AS(SELECT * FROM usuarios WHERE tipo = (SELECT id FROM tipos WHERE UPPER(tipoNome) = UPPER("Instrutor")));
-CREATE OR REPLACE VIEW view_alunos AS(SELECT * FROM usuarios WHERE tipo = (SELECT id FROM tipos WHERE UPPER(tipoNome) = UPPER("Aluno")));
+CREATE OR REPLACE VIEW view_Instrutores AS(SELECT *, YEAR(CURDATE())-YEAR(data_nascimento)-IF(MONTH(CURDATE())*32+DAY(CURDATE())<MONTH(data_nascimento)*32+DAY(data_nascimento),1,0) as idade FROM usuarios WHERE tipo = (SELECT id FROM tipos WHERE UPPER(tipoNome) = UPPER("Instrutor")));
+CREATE OR REPLACE VIEW view_alunos AS (SELECT *, YEAR(CURDATE())-YEAR(data_nascimento)-IF(MONTH(CURDATE())*32+DAY(CURDATE())<MONTH(data_nascimento)*32+DAY(data_nascimento),1,0) as idade FROM usuarios WHERE tipo = (SELECT id FROM tipos WHERE UPPER(tipoNome) = UPPER("Aluno")));
+
+-- CREATE OR REPLACE VIEW view_Instrutores AS(SELECT * FROM usuarios WHERE tipo = (SELECT id FROM tipos WHERE UPPER(tipoNome) = UPPER("Instrutor")));
+-- CREATE OR REPLACE VIEW view_alunos AS (SELECT * FROM usuarios WHERE tipo = (SELECT id FROM tipos WHERE UPPER(tipoNome) = UPPER("Aluno")));

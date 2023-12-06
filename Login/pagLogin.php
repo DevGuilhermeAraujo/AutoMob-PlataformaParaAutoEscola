@@ -21,7 +21,6 @@ if (logued()) {
 </head>
 
 <body>
-    <?php echo (logued())?"sim":"não"; ?>
     <div id="titulo">
         <h1><img class="iconeTitulos" src="../Imgs/icoBandeira.png" alt="icone volante"> Auto escola Automob <img class="iconeTitulos" src="../Imgs/icoBandeira.png" alt="icone volante"></h1>
     </div>
