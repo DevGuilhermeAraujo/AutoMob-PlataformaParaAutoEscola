@@ -73,7 +73,7 @@ requiredLogin(getDbUtils()->PERMISSION_INSTRUTOR());
     <div class="Nav">
         <a href="../Login/pagLogin.php"><img class="iconeNav" src="../Imgs/icoSair.png" alt="icone sair"> Voltar</a>
         <a href="../Cadastrados/Veiculos.php"><img class="iconeNav" src="../Imgs/icoVolante.png" alt="icone veículos"> Veículos</a>
-        <a href="cadastrar.php"><img class="iconeNav" src="../Imgs/icoCadastro.png" alt="icone de cadastro">Cadastrar</a>
+        <a href="../Instrutor/cadastrar.php"><img class="iconeNav" src="../Imgs/icoCadastro.png" alt="icone de cadastro">Cadastrar</a>
     </div>
     <div class="Agenda">
         <h2>Alunos cadastrados</h2>
@@ -83,7 +83,7 @@ requiredLogin(getDbUtils()->PERMISSION_INSTRUTOR());
                 <span>Nome</span>
                 <span>Data de Nascimento</span>
                 <span>Idade</span>
-                <span>Validado</span>
+                <!--<span>Validado</span>-->
                 <span>Remover</span>
             </p>
         </div>
@@ -99,7 +99,7 @@ requiredLogin(getDbUtils()->PERMISSION_INSTRUTOR());
                     <span><?= $i['nome'] ?></span>
                     <span><?= $i['data_nascimento'] ?></span>
                     <span><?= $i['idade'] ?></span>
-                    <button <?php if (($i['validado'] == 0)) { ?> onclick="confirmMenssage(<?= $i['id'] ?>,'Aceitar usuário <?= $i['nome'] ?> ?','aceitar');" <?php } ?> class="<?= ($i['validado'] == 1) ? "buttonPositive" : "" ?>"><?= ($i['validado'] == 1) ? "Sim" : "Não" ?></button>
+                    <!--<button <?php if (($i['validado'] == 0)) { ?> onclick="confirmMenssage(<?= $i['id'] ?>,'Aceitar usuário <?= $i['nome'] ?> ?','aceitar');" <?php } ?> class="<?= ($i['validado'] == 1) ? "buttonPositive" : "" ?>"><?= ($i['validado'] == 1) ? "Sim" : "Não" ?></button>-->
                     <button onclick="removerCadastroMenssage(<?= $i['id'] ?>,'<?= $i['nome'] ?>');">X</button>
                 </p>
         <?php
