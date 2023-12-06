@@ -20,10 +20,10 @@ requiredLogin(getDbUtils()->PERMISSION_INSTRUTOR());
                 _type: msg1.SET_TYPE_TEXT,
                 _title: "Excluir usuário?",
                 _menssagem: "Tem certeza que deseja excluir o usuário " + user + "?",
-                _btnOkName: "Sim",
+                _btnOkName: "<i>Excluir</i>",
                 //_btnOkHref: "../backEnd/processNovoUsuario.php?idUser=" + id + "&recusar",
                 _btnOkAction: "sentAjaxGET('../backEnd/processNovoUsuario.php', 'idUser=" + id + "&recusar',update);",
-                _btnCancelName: "Cancelar",
+                _btnCancelName: "<i>Cancelar</i>",
                 _autoDestroy: true
             });
         }

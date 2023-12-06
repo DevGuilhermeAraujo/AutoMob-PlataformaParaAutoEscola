@@ -77,12 +77,7 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
     </div>
     -->
     <?= HTML::getInicioPage() ?>
-    
-    <div class="Nav">
-        
-        <a href="../backEnd/logout.php"><img class="iconeNav" src="../Imgs/icoSair.png" alt="icone sair"> Sair</a>
-       
-    </div>
+        <a id="sair" href="../backEnd/logout.php"><img class="iconeNav" src="../Imgs/icoSair.png" alt="icone sair"> Sair</a>
     <div class="Agenda">
         <h2>Meus horários</h2>
         <div class="titulos">
@@ -91,13 +86,13 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
                 <span>Carro</span>
                 <span>Placa</span>
                 <span>Professor</span>
-                <span>Remover</span>
+                <span>Desmarcar</span>
             </p>
         </div>
         <?php
         $result = $db->executar("SELECT a.id, DATE_FORMAT(a.data_aula, '%d/%m/%Y') AS data_aula, a.horario_aula, c.marca, c.placa, vi.nome FROM agendamentos AS a JOIN  carros AS c ON a.carro_id = c.id JOIN view_instrutores AS vi ON a.Instrutor_id = vi.id WHERE a.aluno_id = '$idUser'", true);
         if ($result->rowCount() == 0) {
-            echo '<p><span> Não há horários marcados para você </span> </p>';
+            echo '<p>Não há horários marcados para você </p>';
         } else {
             foreach ($result as $agendamento) {
                 $idAgendamento = $agendamento['id'];
@@ -120,7 +115,7 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
     </div>
     <form method="POST">
         <h2><img id="Agenda" src="../Imgs/icoAgenda.png" alt="icone agendamento"> Agendar horário</h2>
-        <select name="veiculo" required>
+        <select id="sel" name="veiculo" required>
             <option value="">Veículo</option>
             <?php
             $result = $db->executar("SELECT id, modelo FROM carros");

@@ -60,7 +60,7 @@ requiredLogin(getDbUtils()->PERMISSION_INSTRUTOR());
         <?php
             }
         }else{
-            echo "<p><span> Não há horários marcados para você </span></p>";
+            echo "<p>Não há horários marcados para você</p>";
         }
         ?>
         <!--

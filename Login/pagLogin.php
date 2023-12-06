@@ -89,18 +89,6 @@ if (logued()) {
         </div>
 
     </div>
-    <!--Este painel deverá ser apagado ao final do desenvolvimento-->
-    <div class="painelCentral">
-        <h2>Area destinada a testes dos cadastros</h2>
-        <div class="testes">
-            <h2>Carros cadastrados</h2>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis atque ullam sit aliquid at totam nam, iste numquam nobis quae consequatur quaerat eius enim officia nostrum facilis minima vitae iusto.</p>
-        </div>
-        <div class="testes">
-            <h2>Alunos cadastrados</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione laudantium, aliquid, sit illo quod molestiae aut nesciunt omnis similique qui quisquam, deserunt modi dignissimos reprehenderit quibusdam aspernatur repellat minus quae!</p>
-        </div>
-    </div>
     <script src="../index.js"></script>
 </body>
 
