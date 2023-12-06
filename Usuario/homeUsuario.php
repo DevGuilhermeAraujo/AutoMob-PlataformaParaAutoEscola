@@ -87,13 +87,13 @@ if (isset($_POST['data']) && isset($_POST['veiculo'])) {
                 <span>Carro</span>
                 <span>Placa</span>
                 <span>Professor</span>
-                <span>Remover</span>
+                <span>Desmarcar</span>
             </p>
         </div>
         <?php
         $result = $db->executar("SELECT a.id, DATE_FORMAT(a.data_aula, '%d/%m/%Y') AS data_aula, a.horario_aula, c.marca, c.placa, vi.nome FROM agendamentos AS a JOIN  carros AS c ON a.carro_id = c.id JOIN view_instrutores AS vi ON a.Instrutor_id = vi.id WHERE a.aluno_id = '$idUser'", true);
         if ($result->rowCount() == 0) {
-            echo '<p><span> Não há horários marcados para você </span> </p>';
+            echo '<p>Não há horários marcados para você </p>';
         } else {
             foreach ($result as $agendamento) {
                 $idAgendamento = $agendamento['id'];
