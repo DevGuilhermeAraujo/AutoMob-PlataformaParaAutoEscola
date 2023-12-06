@@ -73,6 +73,12 @@ class Sessao
     }
 }
 
+class HTML{
+    public static function getInicioPage(){
+        include dirname(__DIR__,1)."/backEnd/modulos/fragments/headPages.php";
+    }
+}
+
 //Funções para o Front-End
 
 function setSessionVars(ValidaUsuario $user)
