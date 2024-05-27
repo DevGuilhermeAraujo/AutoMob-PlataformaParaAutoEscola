@@ -23,13 +23,13 @@ com o objetivo de facilitar a comunicação, agendamento de aulas e provas.
 
 **Tecnologias Utilizadas:**
 
-    Para o desenvolvimento deste projeto, foram utilizadas as seguintes tecnologias:
+Para o desenvolvimento deste projeto, foram utilizadas as seguintes tecnologias:
     
-      Linguagem de Programação: PHP, JavaScript
+  Linguagem de Programação: PHP, JavaScript
       
-      Banco de Dados: MySQL
+  Banco de Dados: MySQL
       
-      Controle de Versão: Git
+  Controle de Versão: Git
 
 
 
